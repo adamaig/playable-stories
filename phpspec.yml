@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: PlayableStories
+        psr4_prefix: PlayableStories
+        src_path: app

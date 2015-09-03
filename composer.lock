@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
+    "hash": "60f05d29cc94be0f424eac842d3316c4",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -363,16 +363,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.12",
+            "version": "v5.1.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "76a9816f37a58383f6ba093ccf08f253e5488555"
+                "reference": "231b5ee6d8439edb5f7d45da00fd31d915bdf6f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/76a9816f37a58383f6ba093ccf08f253e5488555",
-                "reference": "76a9816f37a58383f6ba093ccf08f253e5488555",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/231b5ee6d8439edb5f7d45da00fd31d915bdf6f0",
+                "reference": "231b5ee6d8439edb5f7d45da00fd31d915bdf6f0",
                 "shasum": ""
             },
             "require": {
@@ -487,7 +487,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-08-30 23:25:48"
+            "time": "2015-09-03 16:00:33"
         },
         {
             "name": "league/flysystem",

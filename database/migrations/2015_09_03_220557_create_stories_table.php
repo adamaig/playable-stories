@@ -22,7 +22,7 @@ class CreateStoriesTable extends Migration {
 			$table->string('body_font_color')->default('#999999');
 			$table->string('link_color')->default('#6699dd');
 			$table->string('button_background_color')->default('#6699dd');
-			$table->string('button_text_color')->default('#6699dd');
+			$table->string('button_text_color')->default('#FFFFFF');
 			$table->timestamps();
 		});
 	}

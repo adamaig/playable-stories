@@ -17,7 +17,7 @@ class CreateStoriesTable extends Migration {
 			$table->string('header_font')->default('Oswald');
 			$table->tinyInteger('heading_font_size')->unsigned()->default('28');
 			$table->string('heading_font_color')->default('#333333');
-			$table->string('body_font')->default('Open Sans');
+			$table->string('body_font')->default('Open+Sans');
 			$table->tinyInteger('body_font_size')->unsigned()->default('14');
 			$table->string('body_font_color')->default('#999999');
 			$table->string('link_color')->default('#6699dd');

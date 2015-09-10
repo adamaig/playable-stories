@@ -144,6 +144,12 @@ return [
         PlayableStories\Providers\AuthServiceProvider::class,
         PlayableStories\Providers\EventServiceProvider::class,
         PlayableStories\Providers\RouteServiceProvider::class,
+        PlayableStories\Providers\ValidatorServiceProvider::class,
+
+        /*
+         * Third Party Service Providers...
+         */
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 
@@ -193,6 +199,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Flash'     => Laracasts\Flash\Flash::class,
 
     ],
 

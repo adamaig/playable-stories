@@ -1,0 +1,38 @@
+#navbar {
+    min-height: 60px;
+}
+
+.navbar-brand {
+    height: 60px;
+    line-height: 30px;
+}
+
+#navbar .btn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 0;
+    border-radius: 0;
+    color: #FFF;
+}
+
+#navbar .btn-default {
+    background-color: #ccc;
+}
+
+#navbar .btn-default:hover {
+    background-color: #adadad;
+}
+
+#navbar .btn-primary {
+    background-color: #6699dd;
+}
+
+#navbar .btn-primary:hover {
+    background-color: #337ab7;
+}
+
+#story-builder-form {
+    margin-top: 20px;
+}

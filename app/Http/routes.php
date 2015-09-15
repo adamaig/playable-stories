@@ -1,8 +1,7 @@
 <?php
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::get('/', 'StoryController@index');
+
 Route::resource('story', 'StoryController');
 Route::resource('meter', 'MeterController');
 Route::resource('slide', 'SlideController');

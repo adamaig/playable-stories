@@ -18,7 +18,8 @@ class StoryController extends Controller
      */
     public function index()
     {
-        //
+        $stories = Story::all();
+        return view('homepage')->withStories($stories);
     }
 
     /**
@@ -342,6 +343,12 @@ class StoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $affectedRows  = Story::where('id', '=', $id)->delete();
+        if ($affectedRows > 0) {
+            \Flash::info('The story has been deleted permanently.');
+        } else {
+            \Flash::error('The story could not be deleted.');
+        }
+        return $affectedRows;
     }
 }

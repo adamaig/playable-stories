@@ -299,8 +299,8 @@ class StoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            // Design tab
+        // Design tab
+        $rules = array(
             'background-color' => 'required|hex',
             'background-image' => 'image',
             'heading-font-size' => 'required|numeric|min:10',
@@ -310,7 +310,33 @@ class StoryController extends Controller
             'link-color' => 'required|hex',
             'button-background-color' => 'required|hex',
             'button-text-color' => 'required|hex',
-        ]);
+        );
+
+        // Meters tab
+        foreach ($request->get('meter-name') as $key => $val) {
+            $rules['meter-name.'.$key] = 'required';
+            $rules['meter-type.'.$key] = 'required|in:currency,percentage,number';
+            $rules['meter-start-value.'.$key] = 'required|numeric';
+            $rules['meter-no-min.'.$key] = 'in:true';
+            $rules['meter-min-value.'.$key] = 'required_without:meter-no-min.'.$key.'|numeric';
+            $rules['meter-no-max.'.$key] = 'in:true';
+            $rules['meter-max-value.'.$key] = 'required_without:meter-no-min.'.$key.'|numeric';
+            $rules['min-value-header.'.$key] = 'required_without:meter-no-min.'.$key;
+            $rules['min-value-text.'.$key] = 'required_without:meter-no-min.'.$key;
+            $rules['max-value-header.'.$key] = 'required_without:meter-no-max.'.$key;
+            $rules['max-value-text.'.$key] = 'required_without:meter-no-max.'.$key;
+
+            $messages['meter-name.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a name.';
+            $messages['meter-start-value.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a start value.';
+            $messages['meter-min-value.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a minimum value.';
+            $messages['meter-max-value.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a maximum value.';
+            $messages['min-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Header" if a minimum value is present.';
+            $messages['min-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Text" message if a minimum value is present.';
+            $messages['max-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Header" if a maximum value is present.';
+            $messages['max-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Text" message if a maximum value is present.';
+        }
+
+        $this->validate($request, $rules, $messages);
 
         $story = Story::findOrFail($id);
         $story->background_color = $request->input('background-color');

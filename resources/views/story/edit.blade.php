@@ -62,7 +62,205 @@
                         </div>
 
                         <div role="tabpanel" class="tab-pane" id="meters">
-
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p>Add Up to 2 Meters:<br/>Name your meter, select a meter type, and define the start, min, and max values. The start value is the value of the meter at the begining of the game. The min and max values will trigger messages defined below that will end the game. If there is no min or max value, leave the field blank.</p>
+                                    @if (count($story->meters()->get()) == 0)
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Meter Name</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Meter Name</label>
+                                                            <input type="text" class="form-control" name="meter-name[]" placeholder="Cash" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Meter Type</label>
+                                                            <select class="form-control" name="meter-type[]">
+                                                                <option value="currency" selected>Currency</option>
+                                                                <option value="percentage">Percentage</option>
+                                                                <option value="number">Number</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Start Value</label>
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" name="meter-start-value[]" placeholder="1000" />
+                                                                <div class="input-group-addon">$</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Min. Value</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="meter-min-value[]" placeholder="0" />
+                                                                <div class="input-group-addon">$</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="meter-no-min[]" value="true"> No min.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Max. Value</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="meter-max-value[]" placeholder="0" />
+                                                                <div class="input-group-addon">$</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="meter-no-max[]" value="true" checked> No max.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Min. Value Header</label>
+                                                            <input type="text" class="form-control" name="meter-min-value-header[]" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Min. Value Text</label>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Max. Value Header</label>
+                                                            <input type="text" class="form-control" name="meter-max-value-header[]" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Max. Value Text</label>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-max-value-text[]"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Meter Name</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Meter Name</label>
+                                                            <input type="text" class="form-control" name="meter-name[]" placeholder="Morality" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Meter Type</label>
+                                                            <select class="form-control" name="meter-type[]">
+                                                                <option value="currency">Currency</option>
+                                                                <option value="percentage" selected>Percentage</option>
+                                                                <option value="number">Number</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Start Value</label>
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" name="meter-start-value[]" placeholder="100" />
+                                                                <div class="input-group-addon">%</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Min. Value</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="meter-min-value[]" placeholder="0" />
+                                                                <div class="input-group-addon">%</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="meter-no-min[]" value="true"> No min.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <div class="form-group">
+                                                            <label>Max. Value</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="meter-max-value[]" placeholder="100" />
+                                                                <div class="input-group-addon">#</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="meter-no-max[]" value="true"> No max.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Min. Value Header</label>
+                                                            <input type="text" class="form-control" name="meter-min-value-header[]" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Min. Value Text</label>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Max. Value Header</label>
+                                                            <input type="text" class="form-control" name="meter-max-value-header[]" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>Max. Value Text</label>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-max-value-text[]"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         <div role="tabpanel" class="tab-pane" id="design">
@@ -170,13 +368,24 @@
 
 @section('footer-include')
     <script src="/js/bootstrap-colorpicker.min.js"></script>
+    <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
     <script>
         $(function(){
+            // Initialize ColorPicker
             $('.background-color, .heading-font-color, .body-font-color, .link-color, .button-background-color, .button-text-color').colorpicker({
                 align: 'left',
             });
+
+            // Initialize TinyMCE
+            tinymce.init({
+                selector: '.wysiwyg',
+                elementpath: false,
+                statusbar: false,
+                menubar: false,
+            });
         });
 
+        // Submit for when clicking 'Save' button
         $( "#save-button" ).click(function(event) {
             event.preventDefault();
             $( "#story-builder-form" ).submit();

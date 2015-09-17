@@ -13,7 +13,7 @@ class CreateMetersTable extends Migration {
 			$table->string('name')->default('Meter Name');
 			$table->string('type')->default('number');
 			$table->bigInteger('start_value')->default('1000');
-			$table->bigInteger('min_value')->nullable()->default('0');
+			$table->bigInteger('min_value')->nullable();
 			$table->bigInteger('max_value')->nullable();
 			$table->timestamps();
 		});

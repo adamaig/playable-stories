@@ -8,6 +8,7 @@ use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
 
 use PlayableStories\Story;
+use PlayableStories\Meter;
 
 class StoryController extends Controller
 {
@@ -320,25 +321,26 @@ class StoryController extends Controller
             $rules['meter-no-min.'.$key] = 'in:true';
             $rules['meter-min-value.'.$key] = 'required_without:meter-no-min.'.$key.'|numeric';
             $rules['meter-no-max.'.$key] = 'in:true';
-            $rules['meter-max-value.'.$key] = 'required_without:meter-no-min.'.$key.'|numeric';
-            $rules['min-value-header.'.$key] = 'required_without:meter-no-min.'.$key;
-            $rules['min-value-text.'.$key] = 'required_without:meter-no-min.'.$key;
-            $rules['max-value-header.'.$key] = 'required_without:meter-no-max.'.$key;
-            $rules['max-value-text.'.$key] = 'required_without:meter-no-max.'.$key;
+            $rules['meter-max-value.'.$key] = 'required_without:meter-no-max.'.$key.'|numeric';
+            $rules['meter-min-value-header.'.$key] = 'required_without:meter-no-min.'.$key;
+            $rules['meter-min-value-text.'.$key] = 'required_without:meter-no-min.'.$key;
+            $rules['meter-max-value-header.'.$key] = 'required_without:meter-no-max.'.$key;
+            $rules['meter-max-value-text.'.$key] = 'required_without:meter-no-max.'.$key;
 
             $messages['meter-name.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a name.';
             $messages['meter-start-value.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a start value.';
             $messages['meter-min-value.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a minimum value.';
             $messages['meter-max-value.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a maximum value.';
-            $messages['min-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Header" if a minimum value is present.';
-            $messages['min-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Text" message if a minimum value is present.';
-            $messages['max-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Header" if a maximum value is present.';
-            $messages['max-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Text" message if a maximum value is present.';
+            $messages['meter-min-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Header" if a minimum value is present.';
+            $messages['meter-min-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Text" message if a minimum value is present.';
+            $messages['meter-max-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Header" if a maximum value is present.';
+            $messages['meter-max-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Text" message if a maximum value is present.';
         }
 
         $this->validate($request, $rules, $messages);
 
         $story = Story::findOrFail($id);
+        // Design tab
         $story->background_color = $request->input('background-color');
         $story->heading_font = $request->input('heading-font');
         $story->heading_font_size = $request->input('heading-font-size');
@@ -349,11 +351,45 @@ class StoryController extends Controller
         $story->link_color = $request->input('link-color');
         $story->button_background_color = $request->input('button-background-color');
         $story->button_text_color = $request->input('button-text-color');
+        // Meters tab
+        $story->success_heading = $request->input('success-heading');
+        $story->success_content = $request->input('success-content');
+
         $story->save();
 
+        // Save background image from design tab
         if ($request->file('background-image')) {
             $backgroundImageName = $story->id . '.' . $request->file('background-image')->getClientOriginalExtension();
             $request->file('background-image')->move(base_path() . '/public/images/story-backgrounds/', $backgroundImageName);
+        }
+
+        // Loop through each meter and save them after deleting any old meters
+        Meter::where('story_id', '=', $story->id)->delete();
+
+        foreach ($request->get('meter-name') as $key => $val) {
+            $meter = new Meter;
+
+            $meter->story_id = $story->id;
+            $meter->order = $key+1;
+            $meter->name = $request->input('meter-name.'.$key);
+            $meter->type = $request->input('meter-type.'.$key);
+            $meter->start_value = $request->input('meter-start-value.'.$key);
+            if ($request->input('meter-no-min.'.$key) != 'true') {
+                $meter->min_value = $request->input('meter-min-value.'.$key); 
+            } else {
+                $meter->min_value = null; 
+            }
+            $meter->min_value_header = $request->input('meter-min-value-header.'.$key);
+            $meter->min_value_text = $request->input('meter-min-value-text.'.$key);
+            if ($request->input('meter-no-max.'.$key) != 'true') {
+                $meter->max_value = $request->input('meter-max-value.'.$key);
+            } else {
+                $meter->max_value = null; 
+            }
+            $meter->max_value_header = $request->input('meter-max-value-header.'.$key);
+            $meter->max_value_text = $request->input('meter-max-value-text.'.$key);
+
+            $meter->save();
         }
 
         \Flash::success('Your story has been updated! You can <a href="/story/' . $story->id . '" target="_blank">view it</a> to see your changes.');

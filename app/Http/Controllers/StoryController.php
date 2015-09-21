@@ -360,7 +360,7 @@ class StoryController extends Controller
         // Save background image from design tab
         if ($request->file('background-image')) {
             $backgroundImageName = $story->id . '.' . $request->file('background-image')->getClientOriginalExtension();
-            $request->file('background-image')->move(base_path() . '/public/images/story-backgrounds/', $backgroundImageName);
+            $request->file('background-image')->move(base_path() . '/public/img/story-backgrounds/', $backgroundImageName);
         }
 
         // Loop through each meter and save them after deleting any old meters

@@ -19,7 +19,7 @@ class Story extends Model {
 		return $this->hasMany('PlayableStories\Meter');
 	}
 
-	public function introduction()
+	public function introductions()
 	{
 		return $this->hasMany('PlayableStories\Introduction');
 	}

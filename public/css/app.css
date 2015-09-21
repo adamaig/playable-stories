@@ -7,6 +7,14 @@
     line-height: 30px;
 }
 
+.btn-margin-bottom {
+    margin-bottom: 15px;
+}
+
+.panel-no-body .panel-heading {
+    border-bottom: 0;
+}
+
 #navbar .btn {
     padding-top: 10px;
     padding-bottom: 10px;

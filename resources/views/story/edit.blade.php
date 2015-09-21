@@ -40,14 +40,17 @@
                                 <input type="text" class="form-control" id="story-name" placeholder="Story Name" value="{{ $story->name }}">
                             </div>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Introduction Slide</h3>
-                                </div>
-                                <div class="panel-body">
-                                    Panel content
-                                </div>
-                            </div>
+                            @if (count($story->introductions()->get()) == 0)
+                                <a class="btn btn-default btn-margin-bottom" href="/story/{{ $story->id }}/introduction" role="button"><i class="fa fa-plus"></i> Add Introduction Slide</a>
+                            @else
+                                @foreach ($story->introductions()->get() as $introduction)
+                                    <div class="panel panel-default panel-no-body">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><a href="/story/{{ $story->id }}/introduction/edit">Introduction Slide</a></h3>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
 
                             @if (count($story->slides()->get()) == 0)
                                 <div class="panel panel-default">

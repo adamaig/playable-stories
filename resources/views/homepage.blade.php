@@ -25,9 +25,9 @@
                                 View at: <a href="/story/{{ $story->id }}" target="_blank">{{ getenv('APP_URL') }}/story/{{ $story->id }}</a>
                             </div>
                             <div class="btn-group btn-group-lg pull-right" role="group" aria-label="...">
-                                <button type="button" class="btn btn-default"><a href="/story/{{ $story->id }}/edit">Edit</a></button>
-                                <button type="button" class="btn btn-default">Duplicate</button>
-                                <button type="button" class="btn btn-default"><a href="javascript:deleteStory('{{ $story->id }}')">Delete</a></button>
+                                <a class="btn btn-default" href="/story/{{ $story->id }}/edit">Edit</a>
+                                <a class="btn btn-default">Duplicate</a>
+                                <a class="btn btn-default" href="javascript:deleteStory('{{ $story->id }}')">Delete</a>
                             </div>
                         </div>
                     </div>

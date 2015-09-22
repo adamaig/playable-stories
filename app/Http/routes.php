@@ -12,8 +12,8 @@ Route::post('/story/{id}/introduction', 'IntroductionController@update');
 
 // Story Slides
 Route::get('/story/{id}/slide', 'SlideController@create');
-Route::get('/story/{id}/slide/edit', 'SlideController@edit');
-Route::post('/story/{id}/slide', 'SlideController@update');
+Route::get('/slide/{id}/edit', 'SlideController@edit');
+Route::post('/slide/{id}', 'SlideController@update');
 Route::delete('/slide/{id}', 'SlideController@destroy');
 Route::get('/slide/{id}/duplicate', 'SlideController@duplicate');
 Route::get('/slide/{id}/shift/{direction}', 'SlideController@shift');

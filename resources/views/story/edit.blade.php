@@ -57,7 +57,7 @@
                                 <div class="panel panel-default panel-no-body">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            {{ $slide->name }}
+                                            <a href="/slide/{{ $slide->id }}/edit">{{ $slide->name }}</a>
                                             <div class="btn-group pull-right">
                                                 <a href="/slide/{{ $slide->id }}/shift/down" class="btn btn-panel-transparent"><i class="fa fa-chevron-up text-valign-center"></i></a>
                                                 <a href="/slide/{{ $slide->id }}/shift/up" class="btn btn-panel-transparent"><i class="fa fa-chevron-down text-valign-center"></i></a>

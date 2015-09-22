@@ -69,7 +69,8 @@ class SlideController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slide = Slide::findOrFail($id);
+        return view('slide.edit')->withSlide($slide);
     }
 
     /**
@@ -81,7 +82,34 @@ class SlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'name' => 'required',
+            'image' => 'image',
+            'content' => 'required',
+            'text-placement' => 'required|in:overlay,under',
+            'text-alignment' => 'required|in:left,right,center,justify',
+        );
+
+        $this->validate($request, $rules);
+
+        $slide = Slide::findOrFail($id);
+        $slide->name = $request->input('name');
+        $slide->image = $request->input('image');
+        $slide->content = $request->input('content');
+        $slide->text_placement = $request->input('text-placement');
+        $slide->text_alignment = $request->input('text-alignment');
+        
+        $slide->save();
+
+        // Save photo
+        if ($request->file('image')) {
+            $imageName = $slide->id . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(base_path() . '/public/img/slide-photos/', $imageName);
+        }
+
+        \Flash::success('Your slide has been updated!');
+
+        return redirect('/story/' . $slide->story->id . '/edit');
     }
 
     /**

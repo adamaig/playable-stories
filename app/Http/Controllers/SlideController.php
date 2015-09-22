@@ -136,4 +136,30 @@ class SlideController extends Controller
 
         return redirect('/story/' . $slide->story->id . '/edit');
     }
+
+    /**
+     * Shift the order of the specified slide up or down.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function shift($id, $direction)
+    {
+        $slide = Slide::find($id);
+
+        $originalSlideOrder = $slide->order;
+
+        if ($direction == 'down') {
+            $slide->order = ($slide->order - 1);
+        } elseif ($direction == 'up') {
+            $slide->order = ($slide->order + 1);
+        }
+        $slide->save();
+
+        $adjacentSlide = Slide::where('order', '=', $slide->order)->where('id', '<>', $id)->first();
+        $adjacentSlide->order = ($originalSlideOrder);
+        $adjacentSlide->save();
+
+        return redirect('/story/' . $slide->story->id . '/edit');
+    }
 }

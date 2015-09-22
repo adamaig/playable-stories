@@ -11,7 +11,7 @@ class Story extends Model {
 
 	public function slides()
 	{
-		return $this->hasMany('PlayableStories\Slide');
+		return $this->hasMany('PlayableStories\Slide')->orderBy('order');
 	}
 
 	public function meters()

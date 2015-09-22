@@ -302,6 +302,7 @@ class StoryController extends Controller
     {
         // Design tab
         $rules = array(
+            'story-name' => 'required',
             'background-color' => 'required|hex',
             'background-image' => 'image',
             'heading-font-size' => 'required|numeric|min:10',
@@ -340,6 +341,7 @@ class StoryController extends Controller
         $this->validate($request, $rules, $messages);
 
         $story = Story::findOrFail($id);
+        $story->name = $request->input('story-name');
         // Design tab
         $story->background_color = $request->input('background-color');
         $story->heading_font = $request->input('heading-font');

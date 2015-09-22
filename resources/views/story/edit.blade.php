@@ -38,7 +38,7 @@
 
                             <div class="form-group">
                                 <label for="story-name">Story Name</label>
-                                <input type="text" class="form-control" id="story-name" placeholder="Story Name" value="{{ $story->name }}">
+                                <input type="text" class="form-control" id="story-name" name="story-name" placeholder="Story Name" value="{{ $story->name }}">
                             </div>
 
                             @if (count($story->introductions()->get()) == 0)

@@ -52,18 +52,18 @@
                                     </div>
                                 @endforeach
                             @endif
-
+                            
                             @foreach ($story->slides()->get() as $slide)
                                 <div class="panel panel-default panel-no-body">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
                                             {{ $slide->name }}
-                                            <span class="pull-right">
-                                                <a href=""><i class="fa fa-chevron-up"></i></a>
-                                                <a href=""><i class="fa fa-chevron-down"></i></a>
-                                                <a href="/slide/{{ $slide->id }}/duplicate"><i class="fa fa-files-o"></i></a>
-                                                <a href="javascript:deleteSlide('{{ $slide->id }}')"><i class="fa fa-times"></i></a>
-                                            </span>
+                                            <div class="btn-group pull-right">
+                                                <a href="" class="btn btn-panel-transparent"><i class="fa fa-chevron-up text-valign-center"></i></a>
+                                                <a href="" class="btn btn-panel-transparent"><i class="fa fa-chevron-down text-valign-center"></i></a>
+                                                <a href="/slide/{{ $slide->id }}/duplicate" class="btn btn-panel-transparent"><i class="fa fa-files-o text-valign-center"></i></a>
+                                                <a href="javascript:deleteSlide('{{ $slide->id }}')" class="btn btn-panel-transparent"><i class="fa fa-times text-valign-center"></i></a>
+                                            </div>
                                         </h3>
                                         
                                     </div>

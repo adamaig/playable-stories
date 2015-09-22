@@ -6868,8 +6868,82 @@ button.close {
 #content:focus {
   outline: none;
 }
+.btn-panel-transparent {
+  color: #777777;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+.btn-panel-transparent:focus,
+.btn-panel-transparent.focus {
+  color: #777777;
+  background-color: #dcdcdc;
+  border-color: #9d9d9d;
+}
+.btn-panel-transparent:hover {
+  color: #777777;
+  background-color: #dcdcdc;
+  border-color: #bebebe;
+}
+.btn-panel-transparent:active,
+.btn-panel-transparent.active,
+.open > .dropdown-toggle.btn-panel-transparent {
+  color: #777777;
+  background-color: #dcdcdc;
+  border-color: #bebebe;
+}
+.btn-panel-transparent:active:hover,
+.btn-panel-transparent.active:hover,
+.open > .dropdown-toggle.btn-panel-transparent:hover,
+.btn-panel-transparent:active:focus,
+.btn-panel-transparent.active:focus,
+.open > .dropdown-toggle.btn-panel-transparent:focus,
+.btn-panel-transparent:active.focus,
+.btn-panel-transparent.active.focus,
+.open > .dropdown-toggle.btn-panel-transparent.focus {
+  color: #777777;
+  background-color: #cacaca;
+  border-color: #9d9d9d;
+}
+.btn-panel-transparent:active,
+.btn-panel-transparent.active,
+.open > .dropdown-toggle.btn-panel-transparent {
+  background-image: none;
+}
+.btn-panel-transparent.disabled,
+.btn-panel-transparent[disabled],
+fieldset[disabled] .btn-panel-transparent,
+.btn-panel-transparent.disabled:hover,
+.btn-panel-transparent[disabled]:hover,
+fieldset[disabled] .btn-panel-transparent:hover,
+.btn-panel-transparent.disabled:focus,
+.btn-panel-transparent[disabled]:focus,
+fieldset[disabled] .btn-panel-transparent:focus,
+.btn-panel-transparent.disabled.focus,
+.btn-panel-transparent[disabled].focus,
+fieldset[disabled] .btn-panel-transparent.focus,
+.btn-panel-transparent.disabled:active,
+.btn-panel-transparent[disabled]:active,
+fieldset[disabled] .btn-panel-transparent:active,
+.btn-panel-transparent.disabled.active,
+.btn-panel-transparent[disabled].active,
+fieldset[disabled] .btn-panel-transparent.active {
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+.btn-panel-transparent .badge {
+  color: #f5f5f5;
+  background-color: #777777;
+}
 .panel-no-body .panel-heading {
   border-bottom: 0;
+  height: 40px;
+}
+.panel-no-body .btn-group {
+  margin: -11px -16px 0 0;
+}
+.panel-no-body .btn-group .btn {
+  height: 42px;
+  padding: 8px 12px 4px;
 }
 #story-builder-form {
   margin-top: 20px;

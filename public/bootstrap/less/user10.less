@@ -118,15 +118,31 @@
     outline: none; // Remove visual focus when tabindex="-1" elements are clicked with a mouse
 }
 
+// Buttons
+.btn-panel-transparent {
+    .button-variant(@gray-light; #f5f5f5; #ddd);
+}
+
+// Custom panels for our story slides
+.panel-no-body .panel-heading {
+    border-bottom: 0;
+    height: 40px;
+}
+    .panel-no-body .btn-group {
+        margin: -11px -16px 0 0;
+    }
+        .panel-no-body .btn-group .btn {
+            height: 42px;
+            padding: 8px 12px 4px;
+        }
+
 
 // Bootstrap overrides
 // Until Bootstrap 4.0 comes out we'll avoid touching the .less files directly - excluding variables.less.
 // 4.0 will drop LESS in favor of SASS, so there's no reason to customize the core if we know it's going away soon.
 // --------------------------------------------------
 
-.panel-no-body .panel-heading {
-    border-bottom: 0;
-}
+
 
 #story-builder-form {
     margin-top: 20px;

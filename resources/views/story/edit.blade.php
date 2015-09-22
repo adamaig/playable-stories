@@ -78,7 +78,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Meter Name</label>
-                                                            <input type="text" class="form-control" name="meter-name[]" placeholder="Cash" />
+                                                            <input type="text" class="form-control" name="meter-name[]" value="Cash" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,7 +97,7 @@
                                                         <div class="form-group">
                                                             <label>Start Value</label>
                                                             <div class="input-group">
-                                                                <input type="number" class="form-control" name="meter-start-value[]" placeholder="1000" />
+                                                                <input type="number" class="form-control" name="meter-start-value[]" value="1000" />
                                                                 <div class="input-group-addon">$</div>
                                                             </div>
                                                         </div>
@@ -106,7 +106,7 @@
                                                         <div class="form-group">
                                                             <label>Min. Value</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-min-value[]" placeholder="0" />
+                                                                <input type="text" class="form-control" name="meter-min-value[]" value="0" />
                                                                 <div class="input-group-addon">$</div>
                                                             </div>
                                                         </div>
@@ -120,7 +120,7 @@
                                                         <div class="form-group">
                                                             <label>Max. Value</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-max-value[]" placeholder="0" />
+                                                                <input type="text" class="form-control" name="meter-max-value[]" value="0" />
                                                                 <div class="input-group-addon">$</div>
                                                             </div>
                                                         </div>
@@ -135,7 +135,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Min. Value Header</label>
-                                                            <input type="text" class="form-control" name="meter-min-value-header[]" />
+                                                            <input type="text" class="form-control" name="meter-min-value-header[]" value="You are out of money!" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -143,7 +143,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Min. Value Text</label>
-                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]"></textarea>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]">Sorry, but it looks like you don't have any cash left to continue. Game over pal!</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,7 +174,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Meter Name</label>
-                                                            <input type="text" class="form-control" name="meter-name[]" placeholder="Morality" />
+                                                            <input type="text" class="form-control" name="meter-name[]" value="Morality" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -193,7 +193,7 @@
                                                         <div class="form-group">
                                                             <label>Start Value</label>
                                                             <div class="input-group">
-                                                                <input type="number" class="form-control" name="meter-start-value[]" placeholder="100" />
+                                                                <input type="number" class="form-control" name="meter-start-value[]" value="100" />
                                                                 <div class="input-group-addon">%</div>
                                                             </div>
                                                         </div>
@@ -202,7 +202,7 @@
                                                         <div class="form-group">
                                                             <label>Min. Value</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-min-value[]" placeholder="0" />
+                                                                <input type="text" class="form-control" name="meter-min-value[]" value="0" />
                                                                 <div class="input-group-addon">%</div>
                                                             </div>
                                                         </div>
@@ -216,13 +216,13 @@
                                                         <div class="form-group">
                                                             <label>Max. Value</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-max-value[]" placeholder="100" />
+                                                                <input type="text" class="form-control" name="meter-max-value[]" />
                                                                 <div class="input-group-addon">#</div>
                                                             </div>
                                                         </div>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="meter-no-max[]" value="true"> No max.
+                                                                <input type="checkbox" name="meter-no-max[]" value="true" checked> No max.
                                                             </label>
                                                         </div>
                                                     </div>
@@ -231,7 +231,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Min. Value Header</label>
-                                                            <input type="text" class="form-control" name="meter-min-value-header[]" />
+                                                            <input type="text" class="form-control" name="meter-min-value-header[]" value="Your choices have lead you to failure" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -239,7 +239,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Min. Value Text</label>
-                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]"></textarea>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]">You have been hanging around the wrong crowd too long. Your choices have finally caught up with you. Game over!</textarea>
                                                         </div>
                                                     </div>
                                                 </div>

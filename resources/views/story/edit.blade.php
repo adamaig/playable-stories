@@ -1,6 +1,7 @@
 @extends('framework')
 
 @section('header-include')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="/css/bootstrap-colorpicker.min.css">
 @stop
 
@@ -52,16 +53,24 @@
                                 @endforeach
                             @endif
 
-                            @if (count($story->slides()->get()) == 0)
-                                <div class="panel panel-default">
+                            @foreach ($story->slides()->get() as $slide)
+                                <div class="panel panel-default panel-no-body">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Slide 01</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        Panel content
+                                        <h3 class="panel-title">
+                                            {{ $slide->name }}
+                                            <span class="pull-right">
+                                                <a href=""><i class="fa fa-chevron-up"></i></a>
+                                                <a href=""><i class="fa fa-chevron-down"></i></a>
+                                                <a href=""><i class="fa fa-files-o"></i></a>
+                                                <a href="javascript:deleteSlide('{{ $slide->id }}')"><i class="fa fa-times"></i></a>
+                                            </span>
+                                        </h3>
+                                        
                                     </div>
                                 </div>
-                            @endif
+                            @endforeach
+
+                            <a class="btn btn-default" href="/story/{{ $story->id }}/slide" role="button"><i class="fa fa-plus"></i> Add New Slide</a>
                         </div>
 
                         <div role="tabpanel" class="tab-pane" id="meters">
@@ -516,5 +525,20 @@
             event.preventDefault();
             $( "#story-builder-form" ).submit();
         });
+
+        function deleteSlide(id) {
+            if (confirm('Delete this slide?')) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "DELETE",
+                    url: '/slide/' + id,
+                    success: function(affectedRows) {
+                        if (affectedRows > 0) location.reload();
+                    }
+                });
+            }
+        }
     </script>
 @stop

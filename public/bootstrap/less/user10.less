@@ -1,0 +1,133 @@
+/*!
+ * Golden Rule v3.0.0 - Me Liquor Android (https://github.com/User10/golden_rule)
+ * Copyright (c) 2013-2015 User10
+ * Licensed under GNU General Public License v2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ */
+
+
+// Extending Bootstrap's helper classes
+// --------------------------------------------------
+
+// Reset any existing pulls
+.pull-none {
+    float: none;
+}
+
+// Vertical alignment
+.text-valign-top {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+}
+.text-valign-center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.text-valign-bottom {
+    display: inline-block;
+    vertical-align: bottom;
+    float: none;
+}
+
+// Add borders to content blocks or sections
+.border-none {
+    border: none;
+}
+.border-above {
+    border-top: 1px;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+.border-below {
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px;
+    border-left: none;
+}
+.border-both {
+    border-top: 1px;
+    border-right: none;
+    border-bottom: 1px;
+    border-left: none;
+}
+
+// Rows with equal height columns
+@media ( min-width: 768px ) {
+    .row-eq-height {
+        display: -webkit-box; /* iOS 6-, Safari 3.1-6 */
+        display: -webkit-flex; /* Chrome */
+        display: -ms-flexbox; /* Tweener - IE 10 */
+        display: flex;
+    }
+        .row-eq-height div[class*='col-'] {
+            display: -webkit-box; /* iOS 6-, Safari 3.1-6 */
+            display: -webkit-flex; /* Chrome */
+            display: -ms-flexbox; /* IE 10 */
+            display: flex;
+        }
+}
+.row-eq-height + .row-eq-height {
+    margin-top: 10px;
+}
+
+// 5 column grid... @JoshMountain said it couldn't be done.
+.col-xs-2-5ths,
+.col-sm-2-5ths,
+.col-md-2-5ths,
+.col-lg-2-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    
+}
+    .col-xs-2-5ths {
+        width: 20%;
+        float: left;
+    }
+@media ( min-width: 768px ) {
+    .col-sm-2-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+@media ( min-width: 992px ) {
+    .col-md-2-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+@media ( min-width: 1200px ) {
+    .col-lg-2-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+
+// Extending Bootstrap's default styling
+// --------------------------------------------------
+
+.container .container {
+    width: 100%; // Prevent overflow on containers that we put inside other containers.
+}
+
+#content:focus {
+    outline: none; // Remove visual focus when tabindex="-1" elements are clicked with a mouse
+}
+
+
+// Bootstrap overrides
+// Until Bootstrap 4.0 comes out we'll avoid touching the .less files directly - excluding variables.less.
+// 4.0 will drop LESS in favor of SASS, so there's no reason to customize the core if we know it's going away soon.
+// --------------------------------------------------
+
+.panel-no-body .panel-heading {
+    border-bottom: 0;
+}
+
+#story-builder-form {
+    margin-top: 20px;
+}

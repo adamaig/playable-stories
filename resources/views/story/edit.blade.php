@@ -7,10 +7,10 @@
 
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/story/{{ $story->id }}" class="btn btn-default" target="_blank">View</a></li>
-            <li><a href="" class="btn btn-primary" id="save-button">Save</a></li>
-        </ul>
+        <div class="navbar-right">
+            <a href="/story/{{ $story->id }}" class="navbar-btn btn btn-default" target="_blank">View</a>
+            <a href="" class="navbar-btn btn btn-primary" id="save-button">Save</a>
+        </div>
     </div>
 @stop
 

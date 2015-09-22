@@ -6,10 +6,10 @@
 
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="" class="btn btn-default" target="_blank">Delete</a></li>
-            <li><a href="" class="btn btn-primary" id="save-button">Save</a></li>
-        </ul>
+        <div class="navbar-right">
+            <a href="" class="navbar-btn btn btn-default" target="_blank">Delete</a>
+            <a href="" class="navbar-btn btn btn-primary" id="save-button">Save</a>
+        </div>
     </div>
 @stop
 

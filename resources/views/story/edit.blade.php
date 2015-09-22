@@ -61,7 +61,7 @@
                                             <span class="pull-right">
                                                 <a href=""><i class="fa fa-chevron-up"></i></a>
                                                 <a href=""><i class="fa fa-chevron-down"></i></a>
-                                                <a href=""><i class="fa fa-files-o"></i></a>
+                                                <a href="/slide/{{ $slide->id }}/duplicate"><i class="fa fa-files-o"></i></a>
                                                 <a href="javascript:deleteSlide('{{ $slide->id }}')"><i class="fa fa-times"></i></a>
                                             </span>
                                         </h3>

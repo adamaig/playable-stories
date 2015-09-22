@@ -15,6 +15,7 @@ Route::get('/story/{id}/slide', 'SlideController@create');
 Route::get('/story/{id}/slide/edit', 'SlideController@edit');
 Route::post('/story/{id}/slide', 'SlideController@update');
 Route::delete('/slide/{id}', 'SlideController@destroy');
+Route::get('/slide/{id}/duplicate', 'SlideController@duplicate');
 
 // Route::resource('meter', 'MeterController');
 // Route::resource('choice', 'ChoiceController');

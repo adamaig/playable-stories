@@ -92,7 +92,14 @@ class SlideController extends Controller
      */
     public function destroy($id)
     {
-        $affectedRows  = Slide::where('id', '=', $id)->delete();
+        $slide = Slide::find($id);
+
+        $affectedRows = Slide::destroy($id);
+
+        foreach (Slide::where('story_id', '=', $slide->story->id)->where('order', '>', $slide->order)->get() as $slide) {
+            $slide->order = ($slide->order - 1);
+            $slide->save();
+        }
 
         if ($affectedRows > 0) {
             \Flash::info('The slide has been deleted permanently.');
@@ -101,5 +108,32 @@ class SlideController extends Controller
         }
 
         return $affectedRows;
+    }
+
+    /**
+     * Duplicate the specified slide within the story.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function duplicate($id)
+    {
+        $slide = Slide::find($id);
+
+        $currentSlideCount = count(Slide::where('story_id', '=', $slide->story->id)->get());
+
+        $newSlide = new Slide;
+        $newSlide->story_id = $slide->story_id;
+        $newSlide->order = $currentSlideCount + 1;
+        $newSlide->name = $slide->name;
+        $newSlide->image = $slide->image;
+        $newSlide->content = $slide->content;
+        $newSlide->text_placement = $slide->text_placement;
+        $newSlide->text_alignment = $slide->text_alignment;
+        $newSlide->save();
+
+        \Flash::success('The slide has been duplicated and added to the end of your story.');
+
+        return redirect('/story/' . $slide->story->id . '/edit');
     }
 }

@@ -109,7 +109,7 @@ class IntroductionController extends Controller
             $request->file('photo')->move(base_path() . '/public/img/introduction-photos/', $photoName);
         }
 
-        \Flash::success('Your introduction slide has been updated!');
+        \Flash::success('Your introduction slide has been saved!');
 
         return redirect('/story/' . $id . '/edit');
     }

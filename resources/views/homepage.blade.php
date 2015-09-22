@@ -17,21 +17,29 @@
         <div class="row">
             <div class="col-xs-12">
                 @include('flash::message')
-                @foreach ($stories as $story)
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="pull-left">
-                                <h4>{{ $story->name }}</h4>
-                                View at: <a href="/story/{{ $story->id }}" target="_blank">{{ getenv('APP_URL') }}/story/{{ $story->id }}</a>
-                            </div>
-                            <div class="btn-group btn-group-lg pull-right" role="group" aria-label="...">
-                                <a class="btn btn-default" href="/story/{{ $story->id }}/edit">Edit</a>
-                                <a class="btn btn-default">Duplicate</a>
-                                <a class="btn btn-default" href="javascript:deleteStory('{{ $story->id }}')">Delete</a>
+                @if ( count( $stories ) == 0 )
+                <div class="jumbotron">
+                    <h1>Let's build some awesome stories!</h1>
+                    <p>We'll guide you through the process of creating an inteactive news story. What are you waiting for?</p>
+                    <p><a class="btn btn-primary btn-lg" href="/story/create" role="button">Get Started</a></p>
+                </div>
+                @else
+                    @foreach ($stories as $story)
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="pull-left">
+                                    <h4>{{ $story->name }}</h4>
+                                    View at: <a href="/story/{{ $story->id }}" target="_blank">{{ getenv('APP_URL') }}/story/{{ $story->id }}</a>
+                                </div>
+                                <div class="btn-group btn-group-lg pull-right" role="group" aria-label="...">
+                                    <a class="btn btn-default" href="/story/{{ $story->id }}/edit">Edit</a>
+                                    <a class="btn btn-default">Duplicate</a>
+                                    <a class="btn btn-default" href="javascript:deleteStory('{{ $story->id }}')">Delete</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

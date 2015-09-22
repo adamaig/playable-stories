@@ -6,9 +6,7 @@
 
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/story/create" class="btn btn-primary">New Story</a></li>
-        </ul>
+        <a href="/story/create" class="navbar-right navbar-btn btn btn-primary">New Story</a>
     </div>
 @stop
 

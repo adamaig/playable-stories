@@ -366,7 +366,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: 'less/**/*.less',
-        tasks: 'less'
+        tasks: ['less', 'cssmin:minifyCore']
       }
     },
 

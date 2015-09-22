@@ -17,12 +17,12 @@
         <div class="row">
             <div class="col-xs-12">
                 @include('flash::message')
-                @if ( count( $stories ) == 0 )
-                <div class="jumbotron">
-                    <h1>Let's build some awesome stories!</h1>
-                    <p>We'll guide you through the process of creating an inteactive news story. What are you waiting for?</p>
-                    <p><a class="btn btn-primary btn-lg" href="/story/create" role="button">Get Started</a></p>
-                </div>
+                @if (count($stories) == 0)
+                    <div class="jumbotron">
+                        <h1>Let's build some awesome stories!</h1>
+                        <p>We'll guide you through the process of creating an inteactive news story. What are you waiting for?</p>
+                        <p><a class="btn btn-primary btn-lg" href="/story/create" role="button">Get Started</a></p>
+                    </div>
                 @else
                     @foreach ($stories as $story)
                         <div class="panel panel-default">

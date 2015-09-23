@@ -1,5 +1,22 @@
 <?php
 
+// Template designs
+Route::get('/intro', function() {
+    return view('templates/intro');
+});
+
+Route::get('/outro', function() {
+    return view('templates/outro');
+});
+
+Route::get('/slide', function() {
+    return view('templates/slide');
+});
+
+Route::get('/vignette', function() {
+    return view('templates/vignette');
+});
+
 Route::get('/', 'StoryController@index');
 
 // Stories

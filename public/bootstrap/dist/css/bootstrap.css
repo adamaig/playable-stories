@@ -6772,6 +6772,19 @@ button.close {
 .pull-none {
   float: none;
 }
+.text-valign-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.text-valign-container:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
 .text-valign-top {
   display: inline-block;
   vertical-align: top;
@@ -6786,6 +6799,16 @@ button.close {
   display: inline-block;
   vertical-align: bottom;
   float: none;
+}
+@media (min-width: 768px) {
+  .navbar-center {
+    float: none !important;
+    text-align: center;
+    margin-right: 0;
+  }
+  .navbar-center > * {
+    width: 100%;
+  }
 }
 .border-none {
   border: none;
@@ -6862,12 +6885,6 @@ button.close {
     float: left;
   }
 }
-.container .container {
-  width: 100%;
-}
-#content:focus {
-  outline: none;
-}
 .btn-panel-transparent {
   color: #777777;
   background-color: #f5f5f5;
@@ -6933,6 +6950,35 @@ fieldset[disabled] .btn-panel-transparent.active {
 .btn-panel-transparent .badge {
   color: #f5f5f5;
   background-color: #777777;
+}
+.container .container {
+  width: 100%;
+}
+.container img {
+  max-width: 100%;
+}
+.navbar-left {
+  float: left !important;
+}
+.navbar-right {
+  float: right !important;
+  margin-right: 0;
+}
+.story-view .navbar {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.jumbotron-full-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 .panel-no-body .panel-heading {
   border-bottom: 0;

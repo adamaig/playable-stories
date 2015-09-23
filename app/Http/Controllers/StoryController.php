@@ -323,10 +323,10 @@ class StoryController extends Controller
             $rules['meter-min-value.'.$key] = 'required_without:meter-no-min.'.$key.'|numeric';
             $rules['meter-no-max.'.$key] = 'in:true';
             $rules['meter-max-value.'.$key] = 'required_without:meter-no-max.'.$key.'|numeric';
-            $rules['meter-min-value-header.'.$key] = 'required_without:meter-no-min.'.$key;
-            $rules['meter-min-value-text.'.$key] = 'required_without:meter-no-min.'.$key;
-            $rules['meter-max-value-header.'.$key] = 'required_without:meter-no-max.'.$key;
-            $rules['meter-max-value-text.'.$key] = 'required_without:meter-no-max.'.$key;
+            // $rules['meter-min-value-header.'.$key] = 'required_without:meter-no-min.'.$key;
+            // $rules['meter-min-value-text.'.$key] = 'required_without:meter-no-min.'.$key;
+            // $rules['meter-max-value-header.'.$key] = 'required_without:meter-no-max.'.$key;
+            // $rules['meter-max-value-text.'.$key] = 'required_without:meter-no-max.'.$key;
 
             $messages['meter-name.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a name.';
             $messages['meter-start-value.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a start value.';

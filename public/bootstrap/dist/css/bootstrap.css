@@ -6951,6 +6951,9 @@ fieldset[disabled] .btn-panel-transparent.active {
   color: #f5f5f5;
   background-color: #777777;
 }
+.btn-margin-bottom {
+  margin-bottom: 20px;
+}
 .container .container {
   width: 100%;
 }

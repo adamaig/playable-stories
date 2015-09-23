@@ -14,7 +14,7 @@ class AddStoryIdToMetersTable extends Migration
     {
         Schema::table('meters', function (Blueprint $table) {
             $table->integer('story_id')->unsigned()->after('id');
-            $table->foreign('story_id')->references('id')->on('stories')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreign('story_id')->references('id')->on('stories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

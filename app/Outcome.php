@@ -16,7 +16,7 @@ class Outcome extends Model {
 
 	public function results()
 	{
-		return $this->hasMany('PlayableStories\OutcomeResults');
+		return $this->hasMany('PlayableStories\OutcomeResult');
 	}
 
 }

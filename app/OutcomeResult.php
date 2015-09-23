@@ -4,7 +4,7 @@ namespace PlayableStories;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OutcomeResults extends Model {
+class OutcomeResult extends Model {
 
 	protected $table = 'outcome_results';
 	public $timestamps = true;

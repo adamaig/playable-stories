@@ -63,6 +63,49 @@
                 </div>
             </div>
 
+            <p>Add Up to 4 Choices:<br/>If no choice is selected the slide will advance with a single continue button.</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    @foreach ($slide->choices()->get() as $choice)
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Choice {{ $choice->order }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label>Choice Text</label>
+                                            <input type="text" class="form-control" name="choice-text[]" value="{{ $choice->text }}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <label>Meter Effect</label>
+                                            <select class="form-control" name="meter-effect[]">
+                                                <option value="chance" @if ($choice->meter_type == 'chance') {{ 'selected' }} @endif>Probablility</option>
+                                                <option value="specific" @if ($choice->meter_type == 'specific') {{ 'selected' }} @endif>Specific</option>
+                                                <option value="none" @if ($choice->meter_type == 'none') {{ 'selected' }} @endif>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <div class="form-group">
+                                            <label>Choice Text</label>
+                                            <input type="text" class="form-control" name="choice-text[]" value="{{ $choice->text }}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    @if (count($slide->choices()->get()) < 4)
+                        <a class="btn btn-default" href="/slide/{{ $slide->id }}/choice" role="button"><i class="fa fa-plus"></i> Add New Choice</a>
+                    @endif
+                </div>
+            </div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </form>
     </div>
@@ -72,7 +115,6 @@
     <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
     <script>
         $(function(){
-
             // Initialize TinyMCE
             tinymce.init({
                 selector: '.wysiwyg',

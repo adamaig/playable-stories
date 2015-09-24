@@ -50,13 +50,26 @@ class ChoiceController extends Controller
         $outcome1->likelihood = '70';
         $outcome1->save();
 
-        $result1 = new OutcomeResult;
-        $result1->meter_id = 
+        foreach ($slide->story->meters()->get() as $meter) {
+            $result = new OutcomeResult;
+            $result->outcome_id = $outcome1->id;
+            $result->meter_id = $meter->id;
+            $result->change = rand(1, 100);
+            $result->save();
+        }
 
         $outcome2 = new Outcome;
         $outcome2->choice_id = $choice->id;
         $outcome2->likelihood = '30';
         $outcome2->save();
+
+        foreach ($slide->story->meters()->get() as $meter) {
+            $result = new OutcomeResult;
+            $result->outcome_id = $outcome2->id;
+            $result->meter_id = $meter->id;
+            $result->change = rand(1, 100);
+            $result->save();
+        }
 
         return redirect('/slide/' . $id . '/edit');
     }

@@ -102,7 +102,7 @@
                         </div>
                     @endforeach
                     @if (count($slide->choices()->get()) < 4)
-                        <a class="btn btn-default" href="/slide/{{ $slide->id }}/choice" role="button"><i class="fa fa-plus"></i> Add New Choice</a>
+                        <a class="btn btn-default btn-margin-bottom" href="/slide/{{ $slide->id }}/choice" role="button"><i class="fa fa-plus"></i> Add New Choice</a>
                     @endif
                 </div>
             </div>

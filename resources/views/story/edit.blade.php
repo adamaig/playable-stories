@@ -70,7 +70,7 @@
                                 </div>
                             @endforeach
 
-                            <a class="btn btn-default" href="/story/{{ $story->id }}/slide" role="button"><i class="fa fa-plus"></i> Add New Slide</a>
+                            <a class="btn btn-default btn-margin-bottom" href="/story/{{ $story->id }}/slide" role="button"><i class="fa fa-plus"></i> Add New Slide</a>
                         </div>
 
                         <div role="tabpanel" class="tab-pane" id="meters">

@@ -3,6 +3,7 @@
 namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -71,6 +72,14 @@ class StoryController extends Controller
     public function show($id)
     {
         $story = Story::findOrFail($id);
+
+        foreach ($story->meters()->get() as $key => $meter) {
+            Session::forget('story-'.$story->id.'-meter-'.($key+1).'-value');
+            Session::forget('story-'.$story->id.'-meter-'.($key+1).'-name');
+
+            Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $meter->start_value);
+            Session::put('story-'.$story->id.'-meter-'.($key+1).'-name', $meter->name);
+        }
 
         if (count($story->introductions()->get()) == 0) {
             $firstSlide = Slide::where('story_id', $story->id)->orderBy('order', 'ASC')->first();

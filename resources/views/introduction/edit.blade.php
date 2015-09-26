@@ -72,10 +72,10 @@
                     <div class="form-group">
                         <label>Background Placement</label>
                         <select class="form-control" name="background-placement">
-                            <option value="left_top" @if ($introduction->text_alignment == 'left_top') {{ 'selected' }} @endif>Left Top Align</option>
-                            <option value="center_top" @if ($introduction->text_alignment == 'center_top') {{ 'selected' }} @endif>Center Top Align</option>
-                            <option value="tile" @if ($introduction->text_alignment == 'tile') {{ 'selected' }} @endif>Tile</option>
-                            <option value="fill" @if ($introduction->text_alignment == 'fill') {{ 'selected' }} @endif>Fill</option>
+                            <option value="left_top" @if ($introduction->background_placement == 'left_top') {{ 'selected' }} @endif>Left Top Align</option>
+                            <option value="center_top" @if ($introduction->background_placement == 'center_top') {{ 'selected' }} @endif>Center Top Align</option>
+                            <option value="tile" @if ($introduction->background_placement == 'tile') {{ 'selected' }} @endif>Tile</option>
+                            <option value="fill" @if ($introduction->background_placement == 'fill') {{ 'selected' }} @endif>Fill</option>
                         </select>
                     </div>
                 </div>

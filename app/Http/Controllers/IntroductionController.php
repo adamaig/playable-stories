@@ -102,13 +102,15 @@ class IntroductionController extends Controller
         $introduction->background_color = $request->input('background-color');
         $introduction->photo_type = $request->input('photo-type');
         $introduction->background_placement = $request->input('background-placement');
-        $introduction->save();
 
         // Save photo
         if ($request->file('photo')) {
             $photoName = $introduction->id . '.' . $request->file('photo')->getClientOriginalExtension();
             $request->file('photo')->move(base_path() . '/public/img/introduction-photos/', $photoName);
+            $introduction->photo = $photoName;
         }
+
+        $introduction->save();
 
         \Flash::success('Your introduction slide has been saved!');
 

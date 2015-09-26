@@ -22,6 +22,7 @@ Route::get('/', 'StoryController@index');
 // Stories
 Route::resource('story', 'StoryController');
 Route::get('/story/{id}/{order}', 'SlideController@show')->where('order', '[0-9]+');
+Route::get('/story/{id}/{order}/choice/{choiceId}', 'SlideController@choose')->where('order', '[0-9]+');
 
 // Introductions
 Route::get('/story/{id}/introduction', 'IntroductionController@create');

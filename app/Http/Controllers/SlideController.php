@@ -180,7 +180,7 @@ class SlideController extends Controller
      */
     public function shift($id, $direction)
     {
-        $slide = Slide::find($id);
+        $slide = Slide::findOrFail($id);
 
         $originalSlideOrder = $slide->order;
 
@@ -196,5 +196,19 @@ class SlideController extends Controller
         $adjacentSlide->save();
 
         return redirect('/story/' . $slide->story->id . '/edit');
+    }
+
+    /**
+     * Process the user's choice and advance them to the next slide.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function choose($id, $order, $choiceId)
+    {
+        $story = Story::findOrFail($id);
+        $choice = Choice::findOrFail($choiceId);
+
+        return redirect('/story/' . $story->id . '/' . ($order+1));
     }
 }

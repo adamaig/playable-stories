@@ -160,8 +160,15 @@ class ChoiceController extends Controller
      */
     public function destroy($id)
     {
+        $choice = Choice::findOrFail($id);
+
         $affectedRows  = Choice::where('id', '=', $id)->delete();
+
         if ($affectedRows > 0) {
+            foreach (Choice::where('slide_id', $choice->slide_id)->orderBy('order', 'ASC')->get() as $key => $choice) {
+                $choice->order = $key+1;
+                $choice->save();
+            }
             \Flash::info('The choice has been deleted permanently.');
         } else {
             \Flash::error('The choice could not be deleted.');

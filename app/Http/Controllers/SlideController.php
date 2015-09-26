@@ -39,7 +39,7 @@ class SlideController extends Controller
         $slide->order = $currentSlideCount + 1;
         $slide->save();
 
-        return redirect('/story/' . $id . '/edit');
+        return redirect('/slide/' . $slide->id . '/edit');
     }
 
     /**

@@ -41,7 +41,7 @@
                     @endif
                     <h1>{{ $introduction->heading }}</h1>
                     {!! $introduction->message !!}
-                    <p><a class="btn btn-primary btn-lg" href="" role="button">Start the story...</a></p>
+                    <p><a class="btn btn-primary btn-lg" href="/story/{{ $introduction->story->id }}/1" role="button">Start the story...</a></p>
                     @if (!empty($introduction->photo) && $introduction->photo_type == 'below')
                         <img src="/img/introduction-photos/{{ $introduction->photo }}" alt="{{ $introduction->story->name }} Introduction" class="introduction-photo" />
                     @endif

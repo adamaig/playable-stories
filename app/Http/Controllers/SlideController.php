@@ -105,14 +105,15 @@ class SlideController extends Controller
         $slide->content = $request->input('content');
         $slide->text_placement = $request->input('text-placement');
         $slide->text_alignment = $request->input('text-alignment');
-        
-        $slide->save();
 
         // Save photo
         if ($request->file('image')) {
             $imageName = $slide->id . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(base_path() . '/public/img/slide-photos/', $imageName);
+            $slide->image = $imageName;
         }
+
+        $slide->save();
 
         \Flash::success('Your slide has been updated!');
 

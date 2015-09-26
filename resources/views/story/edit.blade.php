@@ -218,11 +218,6 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="background-image">Background Image</label>
-                                        <input type="file" name="background-image" id="background-image">
-                                    </div>
-
-                                    <div class="form-group">
                                         <label for="heading-font">Heading Font</label>
                                         <select class="form-control" name="heading-font" id="heading-font">
                                             @foreach ($fonts as $value=>$name)

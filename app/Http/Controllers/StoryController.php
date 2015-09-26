@@ -336,7 +336,6 @@ class StoryController extends Controller
         $rules = array(
             'story-name' => 'required',
             'background-color' => 'required|hex',
-            'background-image' => 'image',
             'heading-font-size' => 'required|numeric|min:10',
             'heading-font-color' => 'required|hex',
             'body-font-size' => 'required|numeric|min:10',
@@ -390,12 +389,6 @@ class StoryController extends Controller
         $story->success_content = $request->input('success-content');
 
         $story->save();
-
-        // Save background image from design tab
-        if ($request->file('background-image')) {
-            $backgroundImageName = $story->id . '.' . $request->file('background-image')->getClientOriginalExtension();
-            $request->file('background-image')->move(base_path() . '/public/img/story-backgrounds/', $backgroundImageName);
-        }
 
         // Loop through each meter and save them after deleting any old meters.
         Meter::where('story_id', '=', $story->id)->delete();

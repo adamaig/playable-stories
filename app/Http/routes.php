@@ -24,11 +24,13 @@ Route::resource('story', 'StoryController');
 
 // Introductions
 Route::get('/story/{id}/introduction', 'IntroductionController@create');
+Route::get('introduction/{id}', 'IntroductionController@show');
 Route::get('/story/{id}/introduction/edit', 'IntroductionController@edit');
 Route::post('/story/{id}/introduction', 'IntroductionController@update');
 
 // Slides
 Route::get('/story/{id}/slide', 'SlideController@create');
+Route::get('slide/{id}', 'SlideController@show');
 Route::get('/slide/{id}/edit', 'SlideController@edit');
 Route::post('/slide/{id}', 'SlideController@update');
 Route::delete('/slide/{id}', 'SlideController@destroy');

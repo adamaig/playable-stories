@@ -104,7 +104,7 @@ class ChoiceController extends Controller
             $outcome->save();
         }
 
-        return redirect('/slide/' . $id . '/edit');
+        return redirect('/choice/' . $choice->id . '/edit');
     }
 
     /**

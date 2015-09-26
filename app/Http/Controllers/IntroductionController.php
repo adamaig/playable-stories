@@ -58,7 +58,8 @@ class IntroductionController extends Controller
      */
     public function show($id)
     {
-        //
+        $introduction = Introduction::findOrFail($id);
+        return view('introduction.show')->withIntroduction($introduction);
     }
 
     /**

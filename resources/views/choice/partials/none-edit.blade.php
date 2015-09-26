@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label>Meter Effect</label>
                     <p>
-                        <input class="form-control" type="text" name="choice-type" value="Specific" disabled>
+                        <input class="form-control" type="text" name="choice-type" value="None" disabled>
                     </p>
                     </select>
                 </div>

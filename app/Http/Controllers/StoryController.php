@@ -9,6 +9,7 @@ use PlayableStories\Http\Controllers\Controller;
 
 use PlayableStories\Story;
 use PlayableStories\Meter;
+use PlayableStories\Introduction;
 
 class StoryController extends Controller
 {
@@ -70,7 +71,14 @@ class StoryController extends Controller
     public function show($id)
     {
         $story = Story::findOrFail($id);
-        return view('story.show')->withStory($story);
+
+        if (count($story->introductions()->get()) == 0) {
+            $firstSlide = Slide::where('story_id', $story->id)->orderBy('order', 'ASC')->first();
+            return redirect('/slide/'.$firstSlide->id);
+        } else {
+            $introduction = Introduction::where('story_id', $story->id)->first();
+            return redirect('/introduction/'.$introduction->id);
+        }
     }
 
     /**

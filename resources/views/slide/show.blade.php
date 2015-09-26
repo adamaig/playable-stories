@@ -57,7 +57,7 @@
                 @endforeach
 
                 @if (count($slide->choices()->get()) == 0)
-                    <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/continue">Continue</a></p>
+                    <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
                 @endif
             </div>
         </div>

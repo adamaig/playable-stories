@@ -4,9 +4,15 @@
     <style>
         .jumbotron-full-page {
             text-align: center;
+            background-color: {{ $slide->story->background_color }};
         }
-        #text-overlay, #slide-text {
+        #text-overlay, #slide-text, .jumbotron p {
             text-align: {{ $slide->text_alignment }};
+            font-size: {{ $slide->story->body_font_size}}px;
+            color: {{ $slide->story->body_font_color}};
+        }
+        a, a:hover, a:visited, a:active, a:link {
+            color: {{ $slide->story->link_color}};
         }
         @if ($slide->text_placement == 'overlay')
             #slide-image-container {
@@ -44,18 +50,11 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-xs-12 col-sm-4 col-sm-offset-2">
-                    <p><a href="">Mike</a></p>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <p><a href="">Andrew</a></p>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-sm-offset-2">
-                    <p><a href="">Brad</a></p>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <p><a href="">Josh</a></p>
-                </div>
+                @foreach ($slide->choices()->get() as $key => $choice)
+                    <div class="col-xs-12 col-sm-4 @if (($key+1) & 1) {{ 'col-sm-offset-2' }} @endif">
+                        <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

@@ -31,10 +31,10 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-left">
-                    <p class="navbar-text">[Meter Name] Cash<br /><span class="lead">$1,000</span></p>
+                    <p class="navbar-text">{{ Session::get('story-'.$slide->story->id.'-meter-1-name') }}<br /><span class="lead">${{ Session::get('story-'.$slide->story->id.'-meter-1-value') }}</span></p>
                 </div>
                 <div class="navbar-right">
-                    <p class="navbar-text text-right">[Meter Name] Days<br /><span class="lead">1</span></p>
+                    <p class="navbar-text text-right">{{ Session::get('story-'.$slide->story->id.'-meter-2-name') }}<br /><span class="lead">{{ Session::get('story-'.$slide->story->id.'-meter-2-value') }}</span></p>
                 </div>
             </div>
         </nav>

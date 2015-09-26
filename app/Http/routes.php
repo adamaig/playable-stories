@@ -38,6 +38,8 @@ Route::get('/slide/{id}/shift/{direction}', 'SlideController@shift');
 // Choices
 Route::post('/slide/{id}/choice', 'ChoiceController@create');
 Route::delete('/choice/{id}', 'ChoiceController@destroy');
+Route::get('/choice/{id}/edit', 'ChoiceController@edit');
+Route::post('/choice/{id}/edit', 'ChoiceController@update');
 
 // Meters
 Route::get('/slide/{id}/meter', 'MeterController@create');

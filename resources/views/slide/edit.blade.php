@@ -111,7 +111,7 @@
                         <div class="panel panel-default panel-no-body">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    Choice {{ $choice->order }} @if (!empty($choice->text) && $choice->text != 'This is where choice text goes.') {{ ' : '.$choice->text }} @endif
+                                    <a href="/choice/{{ $choice->id }}/edit">Choice {{ $choice->order }} @if (!empty($choice->text) && $choice->text != 'This is where choice text goes.') {{ ' : '.$choice->text }} @endif</a>
                                     <div class="btn-group pull-right">
                                         <a href="javascript:deleteChoice('{{ $choice->id }}')" class="btn btn-panel-transparent"><i class="fa fa-times text-valign-center"></i></a>
                                     </div>

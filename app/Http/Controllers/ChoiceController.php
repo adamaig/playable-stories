@@ -137,7 +137,10 @@ class ChoiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $choice = Choice::findOrFail($id);
+        $meters = $choice->slide->story->meters()->get();
+
+        return view('choice.edit')->withChoice($choice)->withMeters($meters);
     }
 
     /**
@@ -149,7 +152,44 @@ class ChoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $choice = Choice::findOrFail($id);
+
+        $choice->text = $request->input('choice-text');
+        $choice->save();
+
+        if ($choice->meter_effect == 'chance') {
+            foreach ($choice->outcomes()->get() as $key => $outcome) {
+                $outcome->likelihood = $request->input('likelihood-'.($key+1));
+                $outcome->vignette = $request->input('vignette-'.($key+1));
+                $outcome->save();
+
+                foreach ($outcome->results()->get() as $resultKey => $result) {
+                    $result->change = $request->input('meter-'.($resultKey+1).'-outcome-'.($key+1));
+                    $result->save();
+                }
+            }
+        } elseif ($choice->meter_effect == 'specific') {
+            foreach ($choice->outcomes()->get() as $key => $outcome) {
+                $outcome->likelihood = 100;
+                $outcome->vignette = $request->input('vignette');
+                $outcome->save();
+
+                foreach ($outcome->results()->get() as $resultKey => $result) {
+                    $result->change = $request->input('meter-'.($resultKey+1).'-outcome-'.($key+1));
+                    $result->save();
+                }
+            }
+        } elseif ($choice->meter_effect == 'none') {
+            foreach ($choice->outcomes()->get() as $key => $outcome) {
+                $outcome->likelihood = 100;
+                $outcome->vignette = $request->input('vignette');
+                $outcome->save();
+            }
+        }
+
+        \Flash::success('Your choice has been updated!');
+
+        return redirect('/slide/' . $choice->slide_id . '/edit');
     }
 
     /**

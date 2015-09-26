@@ -11,15 +11,21 @@
             @if (!empty($introduction->photo) && $introduction->photo_type == 'background')
                 background-image: url('/img/introduction-photos/{{ $introduction->photo }}');
             @endif
-            @if (!empty($introduction->photo) && $introduction->background_placement == 'left_top')
+
+            @if (!empty($introduction->photo) && $introduction->background_placement == 'left_top' && $introduction->photo_type == 'background')
                 background-position: left top;
-            @elseif (!empty($introduction->photo) && $introduction->background_placement == 'center_top')
+            @elseif (!empty($introduction->photo) && $introduction->background_placement == 'center_top' && $introduction->photo_type == 'background')
                 background-position: center top;
             @endif
-            @if (!empty($introduction->photo) && $introduction->background_placement == 'tile')
+
+            @if (!empty($introduction->photo) && $introduction->background_placement == 'tile' && $introduction->photo_type == 'background')
                 background-repeat: repeat;
             @else
                 background-repeat: no-repeat;
+            @endif
+
+            @if (!empty($introduction->photo) && $introduction->background_placement == 'fill' && $introduction->photo_type == 'background')
+                background-size: cover;
             @endif
         }
     </style>

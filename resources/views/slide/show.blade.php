@@ -32,6 +32,28 @@
 @stop
 
 @section('content')
+{{ Session::get('vignette') }}
+    @if (Session::has('vignette'))
+        <div class="modal modal-valign-center fade" id="vignette" tabindex="-1" role="dialog" aria-labelledby="vignetteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {!! Session::pull('vignette') !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    @endif
+
     <div class="jumbotron jumbotron-full-page">
         <div class="container">
             <div class="row">
@@ -62,4 +84,37 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('footer-include')
+    <script>
+        @if (Session::has('vignette'))
+            // Vertically center our modals
+            function centerModals($element) {
+                var $modals;
+                
+                if ($element.length) {
+                    $modals = $element;
+                } else {
+                    $modals = $('.modal-valign-center:visible');
+                }
+                
+                $modals.each( function(i) {
+                    var $clone = $(this).clone().css('display', 'block').appendTo('body');
+                    var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
+                    top = top > 0 ? top : 0;
+                    $clone.remove();
+                    $(this).find('.modal-content').css("margin-top", top);
+                });
+            }
+            
+            $('.modal-valign-center').on('show.bs.modal', function(e) {
+                centerModals($(this));
+            });
+            
+            $(window).on('resize', centerModals);
+            
+            $('#vignette').modal('show');
+        @endif
+    </script>
 @stop

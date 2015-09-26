@@ -4,6 +4,8 @@ namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
+
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
 
@@ -208,7 +210,69 @@ class SlideController extends Controller
     {
         $story = Story::findOrFail($id);
         $choice = Choice::findOrFail($choiceId);
+        $slide = Slide::where('story_id', $story->id)->where('order', $order)->first();
 
-        return redirect('/story/' . $story->id . '/' . ($order+1));
+        if ($choice->meter_effect == 'none') {
+            if (count($story->slides()->get()) == $order) {
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
+            }
+
+            return redirect('/story/' . $story->id . '/' . ($order+1));
+        } elseif ($choice->meter_effect == 'specific') {
+            $outcome = Outcome::where('choice_id', $choiceId)->first();
+
+            foreach ($outcome->results()->get() as $key => $result) {
+                $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
+                Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $newMeterValue);
+            }
+
+            foreach ($story->meters()->get() as $key => $meter) {
+                if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') <= $meter->min_value && $meter->min_value !== null) {
+                    return view('slide.end')->withText($meter->min_value_text)->withHeading($meter->min_value_header)->withSlide($slide)->withStory($story);
+                }
+
+                if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') >= $meter->max_value && $meter->max_value !== null) {
+                    return view('slide.end')->withText($meter->max_value_text)->withHeading($meter->max_value_header)->withSlide($slide)->withStory($story);
+                }
+            }
+
+            if (count($story->slides()->get()) == $order) {
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
+            }
+
+            return redirect('/story/' . $story->id . '/' . ($order+1));
+        } elseif ($choice->meter_effect == 'chance') {
+            $outcome = Outcome::where('choice_id', $choiceId)->first();
+
+            if ($outcome->likelihood <= rand(1,100)) {
+                foreach ($outcome->results()->get() as $key => $result) {
+                    $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
+                    Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $newMeterValue);
+                }
+            } else {
+                $outcome = Outcome::where('choice_id', $choiceId)->orderBy('id', 'desc')->first();
+
+                foreach ($outcome->results()->get() as $key => $result) {
+                    $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
+                    Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $newMeterValue);
+                }
+            }
+
+            foreach ($story->meters()->get() as $key => $meter) {
+                if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') <= $meter->min_value && $meter->min_value !== null) {
+                    return view('slide.end')->withText($meter->min_value_text)->withHeading($meter->min_value_header)->withSlide($slide)->withStory($story);
+                }
+
+                if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') >= $meter->max_value && $meter->max_value !== null) {
+                    return view('slide.end')->withText($meter->max_value_text)->withHeading($meter->max_value_header)->withSlide($slide)->withStory($story);
+                }
+            }
+
+            if (count($story->slides()->get()) == $order) {
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
+            }
+
+            return redirect('/story/' . $story->id . '/' . ($order+1));
+        }
     }
 }

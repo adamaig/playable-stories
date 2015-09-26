@@ -1,7 +1,6 @@
-@extends('framework-story')
+@extends('framework-slide')
     
 @section('header-include')
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
 
 @section('content')

@@ -101,7 +101,6 @@ class SlideController extends Controller
 
         $slide = Slide::findOrFail($id);
         $slide->name = $request->input('name');
-        $slide->image = $request->input('image');
         $slide->content = $request->input('content');
         $slide->text_placement = $request->input('text-placement');
         $slide->text_alignment = $request->input('text-alignment');

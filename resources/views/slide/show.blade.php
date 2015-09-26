@@ -2,6 +2,12 @@
     
 @section('header-include')
     <style>
+        .jumbotron-full-page {
+            text-align: center;
+        }
+        #text-overlay, #slide-text {
+            text-align: {{ $slide->text_alignment }};
+        }
         @if ($slide->text_placement == 'overlay')
             #slide-image-container {
                 display: inline-block;
@@ -15,7 +21,7 @@
                 position: absolute;
                 padding: 15px;
             }
-        @endif
+        @endif    
     </style>
 @stop
 
@@ -33,7 +39,7 @@
                         </div>
                     @endif
                     @if (empty($slide->image) || $slide->text_placement == 'under')
-                        {!! $slide->content !!}
+                        <div id="slide-text">{!! $slide->content !!}</div>
                     @endif
                 </div>
             </div>

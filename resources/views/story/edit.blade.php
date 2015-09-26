@@ -77,17 +77,17 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <p>Add Up to 2 Meters:<br/>Name your meter, select a meter type, and define the start, min, and max values. The start value is the value of the meter at the begining of the game. The min and max values will trigger messages defined below that will end the game. If there is no min or max value, leave the field blank.</p>
-                                    @if (count($story->meters()->get()) == 0)
+                                    @foreach ($story->meters()->get() as $meter)
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <h3 class="panel-title">Meter Name</h3>
+                                                <h3 class="panel-title">{{ $meter->name }}</h3>
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Meter Name</label>
-                                                            <input type="text" class="form-control" name="meter-name[]" value="Cash" />
+                                                            <input type="text" class="form-control" name="meter-name[]" value="{{ $meter->name }}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,9 +96,9 @@
                                                         <div class="form-group">
                                                             <label>Meter Type</label>
                                                             <select class="form-control" name="meter-type[]">
-                                                                <option value="currency" selected>Currency</option>
-                                                                <option value="percentage">Percentage</option>
-                                                                <option value="number">Number</option>
+                                                                <option value="currency" @if ($meter->type == 'currency') {{ 'selected' }} @endif>Currency</option>
+                                                                <option value="percentage" @if ($meter->type == 'percentage') {{ 'selected' }} @endif>Percentage</option>
+                                                                <option value="number" @if ($meter->type == 'number') {{ 'selected' }} @endif>Number</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -106,7 +106,7 @@
                                                         <div class="form-group">
                                                             <label>Start Value</label>
                                                             <div class="input-group">
-                                                                <input type="number" class="form-control" name="meter-start-value[]" value="1000" />
+                                                                <input type="number" class="form-control" name="meter-start-value[]" value="{{ $meter->start_value }}" />
                                                                 <div class="input-group-addon">$</div>
                                                             </div>
                                                         </div>
@@ -115,13 +115,13 @@
                                                         <div class="form-group">
                                                             <label>Min. Value</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-min-value[]" value="0" />
+                                                                <input type="text" class="form-control" name="meter-min-value[]" value="{{ $meter->min_value }}" />
                                                                 <div class="input-group-addon">$</div>
                                                             </div>
                                                         </div>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="meter-no-min[]" value="true"> No min.
+                                                                <input type="checkbox" name="meter-no-min[]" value="true" @if (is_null($meter->min_value)) {{ 'checked' }} @endif> No min.
                                                             </label>
                                                         </div>
                                                     </div>
@@ -129,13 +129,13 @@
                                                         <div class="form-group">
                                                             <label>Max. Value</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-max-value[]" value="0" />
+                                                                <input type="text" class="form-control" name="meter-max-value[]" value="{{ $meter->max_value }}" />
                                                                 <div class="input-group-addon">$</div>
                                                             </div>
                                                         </div>
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="meter-no-max[]" value="true" checked> No max.
+                                                                <input type="checkbox" name="meter-no-max[]" value="true" @if (is_null($meter->max_value)) {{ 'checked' }} @endif> No max.
                                                             </label>
                                                         </div>
                                                     </div>
@@ -144,7 +144,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Min. Value Header</label>
-                                                            <input type="text" class="form-control" name="meter-min-value-header[]" value="You are out of money!" />
+                                                            <input type="text" class="form-control" name="meter-min-value-header[]" value="{{ $meter->min_value_header }}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,7 +152,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Min. Value Text</label>
-                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]">Sorry, but it looks like you don't have any cash left to continue. Game over pal!</textarea>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]">{!! $meter->min_value_text !!}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,7 +160,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Max. Value Header</label>
-                                                            <input type="text" class="form-control" name="meter-max-value-header[]" />
+                                                            <input type="text" class="form-control" name="meter-max-value-header[]" value="{{ $meter->max_value_header }}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,207 +168,15 @@
                                                     <div class="col-xs-12">
                                                         <div class="form-group">
                                                             <label>Max. Value Text</label>
-                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-max-value-text[]"></textarea>
+                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-max-value-text[]">{!! $meter->max_value_text !!}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Meter Name</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <label>Meter Name</label>
-                                                            <input type="text" class="form-control" name="meter-name[]" value="Morality" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="form-group">
-                                                            <label>Meter Type</label>
-                                                            <select class="form-control" name="meter-type[]">
-                                                                <option value="currency">Currency</option>
-                                                                <option value="percentage" selected>Percentage</option>
-                                                                <option value="number">Number</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <div class="form-group">
-                                                            <label>Start Value</label>
-                                                            <div class="input-group">
-                                                                <input type="number" class="form-control" name="meter-start-value[]" value="100" />
-                                                                <div class="input-group-addon">%</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <div class="form-group">
-                                                            <label>Min. Value</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-min-value[]" value="0" />
-                                                                <div class="input-group-addon">%</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="meter-no-min[]" value="true"> No min.
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <div class="form-group">
-                                                            <label>Max. Value</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="meter-max-value[]" />
-                                                                <div class="input-group-addon">#</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="meter-no-max[]" value="true" checked> No max.
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <label>Min. Value Header</label>
-                                                            <input type="text" class="form-control" name="meter-min-value-header[]" value="Your choices have lead you to failure" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <label>Min. Value Text</label>
-                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]">You have been hanging around the wrong crowd too long. Your choices have finally caught up with you. Game over!</textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <label>Max. Value Header</label>
-                                                            <input type="text" class="form-control" name="meter-max-value-header[]" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <label>Max. Value Text</label>
-                                                            <textarea class="form-control wysiwyg" rows="3" name="meter-max-value-text[]"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @else
-                                        @foreach ($story->meters()->get() as $meter)
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title">{{ $meter->name }}</h3>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group">
-                                                                <label>Meter Name</label>
-                                                                <input type="text" class="form-control" name="meter-name[]" value="{{ $meter->name }}" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-3">
-                                                            <div class="form-group">
-                                                                <label>Meter Type</label>
-                                                                <select class="form-control" name="meter-type[]">
-                                                                    <option value="currency" @if ($meter->type == 'currency') {{ 'selected' }} @endif>Currency</option>
-                                                                    <option value="percentage" @if ($meter->type == 'percentage') {{ 'selected' }} @endif>Percentage</option>
-                                                                    <option value="number" @if ($meter->type == 'number') {{ 'selected' }} @endif>Number</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-3">
-                                                            <div class="form-group">
-                                                                <label>Start Value</label>
-                                                                <div class="input-group">
-                                                                    <input type="number" class="form-control" name="meter-start-value[]" value="{{ $meter->start_value }}" />
-                                                                    <div class="input-group-addon">$</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-3">
-                                                            <div class="form-group">
-                                                                <label>Min. Value</label>
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control" name="meter-min-value[]" value="{{ $meter->min_value }}" />
-                                                                    <div class="input-group-addon">$</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="meter-no-min[]" value="true" @if (is_null($meter->min_value)) {{ 'checked' }} @endif> No min.
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-3">
-                                                            <div class="form-group">
-                                                                <label>Max. Value</label>
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control" name="meter-max-value[]" value="{{ $meter->max_value }}" />
-                                                                    <div class="input-group-addon">$</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="meter-no-max[]" value="true" @if (is_null($meter->max_value)) {{ 'checked' }} @endif> No max.
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group">
-                                                                <label>Min. Value Header</label>
-                                                                <input type="text" class="form-control" name="meter-min-value-header[]" value="{{ $meter->min_value_header }}" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group">
-                                                                <label>Min. Value Text</label>
-                                                                <textarea class="form-control wysiwyg" rows="3" name="meter-min-value-text[]">{!! $meter->min_value_text !!}</textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group">
-                                                                <label>Max. Value Header</label>
-                                                                <input type="text" class="form-control" name="meter-max-value-header[]" value="{{ $meter->max_value_header }}" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group">
-                                                                <label>Max. Value Text</label>
-                                                                <textarea class="form-control wysiwyg" rows="3" name="meter-max-value-text[]">{!! $meter->max_value_text !!}</textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                    @endforeach
+                                    @if (count($story->meters()->get()) < 2)
+                                        <a class="btn btn-default btn-margin-bottom" href="/slide/{{ $story->id }}/meter" role="button"><i class="fa fa-plus"></i> Add New Meter</a>
                                     @endif
                                     <p>The success message will be displayed once the player finishes the game without exceeding a min or max value defined above.
                                     <div class="panel panel-default">
@@ -517,6 +325,18 @@
                 elementpath: false,
                 statusbar: false,
                 menubar: false,
+            });
+
+            // Javascript to enable link to tab
+            var hash = document.location.hash;
+            var prefix = "tab_";
+            if (hash) {
+                $('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
+            } 
+
+            // Change hash for page-reload
+            $('.nav-tabs a').on('shown.bs.tab', function (e) {
+                window.location.hash = e.target.hash.replace("#", "#" + prefix);
             });
         });
 

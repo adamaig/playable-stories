@@ -29,7 +29,7 @@ class ChoiceController extends Controller
      *
      * @return Response
      */
-    public function create($id)
+    public function create($id, Request $request)
     {
         $slide = Slide::findOrFail($id);
 
@@ -40,35 +40,68 @@ class ChoiceController extends Controller
             return redirect('/slide/' . $id . '/edit');
         }
 
-        $choice = new Choice;
-        $choice->slide_id = $slide->id;
-        $choice->order = count($currentChoices) + 1;
-        $choice->save();
+        if ($request->input('choice-type') == 'chance') {
+            $choice = new Choice;
+            $choice->slide_id = $slide->id;
+            $choice->order = count($currentChoices) + 1;
+            $choice->meter_effect = 'chance';
+            $choice->save();
 
-        $outcome1 = new Outcome;
-        $outcome1->choice_id = $choice->id;
-        $outcome1->likelihood = '70';
-        $outcome1->save();
+            $outcome1 = new Outcome;
+            $outcome1->choice_id = $choice->id;
+            $outcome1->likelihood = '70';
+            $outcome1->save();
 
-        foreach ($slide->story->meters()->get() as $meter) {
-            $result = new OutcomeResult;
-            $result->outcome_id = $outcome1->id;
-            $result->meter_id = $meter->id;
-            $result->change = rand(1, 100);
-            $result->save();
-        }
+            foreach ($slide->story->meters()->get() as $meter) {
+                $result = new OutcomeResult;
+                $result->outcome_id = $outcome1->id;
+                $result->meter_id = $meter->id;
+                $result->change = rand(1, 100);
+                $result->save();
+            }
 
-        $outcome2 = new Outcome;
-        $outcome2->choice_id = $choice->id;
-        $outcome2->likelihood = '30';
-        $outcome2->save();
+            $outcome2 = new Outcome;
+            $outcome2->choice_id = $choice->id;
+            $outcome2->likelihood = '30';
+            $outcome2->save();
 
-        foreach ($slide->story->meters()->get() as $meter) {
-            $result = new OutcomeResult;
-            $result->outcome_id = $outcome2->id;
-            $result->meter_id = $meter->id;
-            $result->change = rand(1, 100);
-            $result->save();
+            foreach ($slide->story->meters()->get() as $meter) {
+                $result = new OutcomeResult;
+                $result->outcome_id = $outcome2->id;
+                $result->meter_id = $meter->id;
+                $result->change = rand(1, 100);
+                $result->save();
+            }
+        } elseif ($request->input('choice-type') == 'specific') {
+            $choice = new Choice;
+            $choice->slide_id = $slide->id;
+            $choice->order = count($currentChoices) + 1;
+            $choice->meter_effect = 'specific';
+            $choice->save();
+
+            $outcome = new Outcome;
+            $outcome->choice_id = $choice->id;
+            $outcome->likelihood = '100';
+            $outcome->save();
+
+            foreach ($slide->story->meters()->get() as $meter) {
+                $result = new OutcomeResult;
+                $result->outcome_id = $outcome->id;
+                $result->meter_id = $meter->id;
+                $result->change = rand(1, 100);
+                $result->save();
+            }
+        } elseif ($request->input('choice-type') == 'none') {
+            $choice = new Choice;
+            $choice->slide_id = $slide->id;
+            $choice->order = count($currentChoices) + 1;
+            $choice->meter_effect = 'none';
+            $choice->save();
+
+            $outcome = new Outcome;
+            $outcome->choice_id = $choice->id;
+            $outcome->likelihood = '100';
+            $outcome->save();
         }
 
         return redirect('/slide/' . $id . '/edit');
@@ -127,6 +160,12 @@ class ChoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $affectedRows  = Choice::where('id', '=', $id)->delete();
+        if ($affectedRows > 0) {
+            \Flash::info('The choice has been deleted permanently.');
+        } else {
+            \Flash::error('The choice could not be deleted.');
+        }
+        return $affectedRows;
     }
 }

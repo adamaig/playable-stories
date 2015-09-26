@@ -32,6 +32,21 @@ class StoryController extends Controller
     {
         $story = new Story;
         $story->save();
+
+        $meter = new Meter;
+        $meter->story_id = $story->id;
+        $meter->order = 1;
+        $meter->name = 'Cash';
+        $meter->type = 'currency';
+        $meter->start_value = 1000;
+        $meter->min_value = 0; 
+        $meter->min_value_header = 'You are out of money!';
+        $meter->min_value_text = '<p>Sorry, but it looks like you don\'t have any cash left to continue. Game over pal!</p>';
+        $meter->max_value = null; 
+        $meter->max_value_header = null;
+        $meter->max_value_text = null;
+        $meter->save();
+
         return redirect('/story/' . $story->id . '/edit');
     }
 
@@ -365,7 +380,7 @@ class StoryController extends Controller
             $request->file('background-image')->move(base_path() . '/public/img/story-backgrounds/', $backgroundImageName);
         }
 
-        // Loop through each meter and save them after deleting any old meters
+        // Loop through each meter and save them after deleting any old meters.
         Meter::where('story_id', '=', $story->id)->delete();
 
         foreach ($request->get('meter-name') as $key => $val) {

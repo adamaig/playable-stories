@@ -22,12 +22,12 @@ Route::get('/', 'StoryController@index');
 // Stories
 Route::resource('story', 'StoryController');
 
-// Introduction Slides
+// Introductions
 Route::get('/story/{id}/introduction', 'IntroductionController@create');
 Route::get('/story/{id}/introduction/edit', 'IntroductionController@edit');
 Route::post('/story/{id}/introduction', 'IntroductionController@update');
 
-// Story Slides
+// Slides
 Route::get('/story/{id}/slide', 'SlideController@create');
 Route::get('/slide/{id}/edit', 'SlideController@edit');
 Route::post('/slide/{id}', 'SlideController@update');
@@ -36,9 +36,11 @@ Route::get('/slide/{id}/duplicate', 'SlideController@duplicate');
 Route::get('/slide/{id}/shift/{direction}', 'SlideController@shift');
 
 // Choices
-Route::get('/slide/{id}/choice', 'ChoiceController@create');
+Route::post('/slide/{id}/choice', 'ChoiceController@create');
+Route::delete('/choice/{id}', 'ChoiceController@destroy');
 
-// Route::resource('meter', 'MeterController');
-// Route::resource('choice', 'ChoiceController');
+// Meters
+Route::get('/slide/{id}/meter', 'MeterController@create');
+
 // Route::resource('outcome', 'OutcomeController');
 // Route::resource('outcomeresults', 'OutcomeResultsController');

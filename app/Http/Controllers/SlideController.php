@@ -9,6 +9,9 @@ use PlayableStories\Http\Controllers\Controller;
 
 use PlayableStories\Story;
 use PlayableStories\Slide;
+use PlayableStories\Choice;
+use PlayableStories\Outcome;
+use PlayableStories\OutcomeResult;
 
 class SlideController extends Controller
 {
@@ -70,7 +73,9 @@ class SlideController extends Controller
     public function edit($id)
     {
         $slide = Slide::findOrFail($id);
-        return view('slide.edit')->withSlide($slide);
+        $meters = $slide->story->meters()->get();
+        $meters = $meters->toArray();
+        return view('slide.edit')->withSlide($slide)->withMeters($meters);
     }
 
     /**
@@ -107,9 +112,82 @@ class SlideController extends Controller
             $request->file('image')->move(base_path() . '/public/img/slide-photos/', $imageName);
         }
 
+        // Loop through each choice and save them after deleting any old choices
+        Choice::where('slide_id', '=', $slide->id)->delete();
+
+        if (!empty($request->get('choice-text'))) {
+            foreach ($request->get('choice-text') as $key => $val) {
+                $currentChoices = $slide->choices()->get();
+
+                if ($request->input('choice-type.'.$key) == 'none') {
+                    $choice = new Choice;
+                    $choice->slide_id = $slide->id;
+                    $choice->order = count($currentChoices) + 1;
+                    $choice->meter_effect = 'none';
+                    $choice->save();
+
+                    $outcome = new Outcome;
+                    $outcome->choice_id = $choice->id;
+                    $outcome->likelihood = '100';
+                    $outcome->vignette = $request->input('vignette.'.$key);
+                    $outcome->save();
+                } elseif ($request->input('choice-type.'.$key) == 'specific') {
+                    $choice = new Choice;
+                    $choice->slide_id = $slide->id;
+                    $choice->order = count($currentChoices) + 1;
+                    $choice->meter_effect = 'specific';
+                    $choice->save();
+
+                    $outcome = new Outcome;
+                    $outcome->choice_id = $choice->id;
+                    $outcome->likelihood = '100';
+                    $outcome->vignette = $request->input('vignette.'.$key);
+                    $outcome->save();
+
+                    foreach ($slide->story->meters()->get() as $meterKey => $meter) {
+                        $result = new OutcomeResult;
+                        $result->outcome_id = $outcome->id;
+                        $result->meter_id = $meter->id;
+                        $result->change = $request->input('meter-'.($meterKey+1).'-change.'.$key);
+                        $result->save();
+                    }
+                } elseif ($request->input('choice-type.'.$key) == 'chance') {
+                    $choice = new Choice;
+                    $choice->slide_id = $slide->id;
+                    $choice->order = count($currentChoices) + 1;
+                    $choice->meter_effect = 'chance';
+                    $choice->save();
+
+                    $outcome1 = new Outcome;
+                    $outcome1->choice_id = $choice->id;
+                    $outcome1->likelihood = $request->input('likelihood-1.'.$key);
+                    $outcome1->save();
+
+                    $outcome2 = new Outcome;
+                    $outcome2->choice_id = $choice->id;
+                    $outcome2->likelihood = $request->input('likelihood-2.'.$key);
+                    $outcome2->save();
+
+                    foreach ($slide->story->meters()->get() as $meterKey => $meter) {
+                        $result1 = new OutcomeResult;
+                        $result1->outcome_id = $outcome1->id;
+                        $result1->meter_id = $meter->id;
+                        $result1->change = $request->input('meter-'.$meter->id.'-outcome-1.'.$key);
+                        $result1->save();
+
+                        $result2 = new OutcomeResult;
+                        $result2->outcome_id = $outcome2->id;
+                        $result2->meter_id = $meter->id;
+                        $result2->change = $request->input('meter-'.$meter->id.'-outcome-2.'.$key);
+                        $result2->save();
+                    }
+                }
+            }
+        }
+
         \Flash::success('Your slide has been updated!');
 
-        return redirect('/story/' . $slide->story->id . '/edit');
+        return redirect('/slide/' . $slide->id . '/edit');
     }
 
     /**

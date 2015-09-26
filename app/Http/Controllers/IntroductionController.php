@@ -112,9 +112,9 @@ class IntroductionController extends Controller
 
         $introduction->save();
 
-        \Flash::success('Your introduction slide has been saved!');
+        \Flash::success('Your introduction slide has been saved! You can <a href="/story/' . $id . '" target="_blank">view it</a> to see your changes.');
 
-        return redirect('/story/' . $id . '/edit');
+        return redirect('/story/' . $id . '/introduction/edit');
     }
 
     /**

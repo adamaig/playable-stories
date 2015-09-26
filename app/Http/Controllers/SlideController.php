@@ -59,9 +59,11 @@ class SlideController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($id, $order)
     {
-        //
+        $story = Story::findOrFail($id);
+        $slide = Slide::where('story_id', $story->id)->where('order', $order)->first();
+        return view('slide.show')->withStory($story)->withSlide($slide);
     }
 
     /**

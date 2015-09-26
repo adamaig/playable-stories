@@ -21,6 +21,7 @@ Route::get('/', 'StoryController@index');
 
 // Stories
 Route::resource('story', 'StoryController');
+Route::get('/story/{id}/{order}', 'SlideController@show');
 
 // Introductions
 Route::get('/story/{id}/introduction', 'IntroductionController@create');
@@ -30,7 +31,6 @@ Route::post('/story/{id}/introduction', 'IntroductionController@update');
 
 // Slides
 Route::get('/story/{id}/slide', 'SlideController@create');
-Route::get('slide/{id}', 'SlideController@show');
 Route::get('/slide/{id}/edit', 'SlideController@edit');
 Route::post('/slide/{id}', 'SlideController@update');
 Route::delete('/slide/{id}', 'SlideController@destroy');

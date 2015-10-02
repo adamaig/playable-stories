@@ -85,7 +85,8 @@ class MeterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $meter = Meter::findOrFail($id);
+        return view('meter.edit')->withMeter($meter);
     }
 
     /**
@@ -97,7 +98,31 @@ class MeterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $meter = Meter::findOrFail($id);
+
+        $meter->name = $request->input('meter-name');
+        $meter->type = $request->input('meter-type');
+        $meter->start_value = $request->input('meter-start-value');
+        if ($request->input('meter-no-min') != 'true') {
+            $meter->min_value = $request->input('meter-min-value'); 
+        } else {
+            $meter->min_value = null; 
+        }
+        $meter->min_value_header = $request->input('meter-min-value-header');
+        $meter->min_value_text = $request->input('meter-min-value-text');
+        if ($request->input('meter-no-max') != 'true') {
+            $meter->max_value = $request->input('meter-max-value');
+        } else {
+            $meter->max_value = null; 
+        }
+        $meter->max_value_header = $request->input('meter-max-value-header');
+        $meter->max_value_text = $request->input('meter-max-value-text');
+
+        $meter->save();
+
+        \Flash::success('Your meter changes have been saved!');
+
+        return redirect('/story/' . $meter->story->id . '/edit#tab_meters');
     }
 
     /**

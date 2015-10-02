@@ -345,30 +345,6 @@ class StoryController extends Controller
             'button-text-color' => 'required|hex',
         );
 
-        // Meters tab
-        foreach ($request->get('meter-name') as $key => $val) {
-            $rules['meter-name.'.$key] = 'required';
-            $rules['meter-type.'.$key] = 'required|in:currency,percentage,number';
-            $rules['meter-start-value.'.$key] = 'required|numeric';
-            $rules['meter-no-min.'.$key] = 'in:true';
-            $rules['meter-min-value.'.$key] = 'required_without:meter-no-min.'.$key.'|numeric';
-            $rules['meter-no-max.'.$key] = 'in:true';
-            $rules['meter-max-value.'.$key] = 'required_without:meter-no-max.'.$key.'|numeric';
-            // $rules['meter-min-value-header.'.$key] = 'required_without:meter-no-min.'.$key;
-            // $rules['meter-min-value-text.'.$key] = 'required_without:meter-no-min.'.$key;
-            // $rules['meter-max-value-header.'.$key] = 'required_without:meter-no-max.'.$key;
-            // $rules['meter-max-value-text.'.$key] = 'required_without:meter-no-max.'.$key;
-
-            $messages['meter-name.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a name.';
-            $messages['meter-start-value.'.$key.'.required'] = 'Your meter (' . ($key+1) . ') must have a start value.';
-            $messages['meter-min-value.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a minimum value.';
-            $messages['meter-max-value.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a maximum value.';
-            $messages['meter-min-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Header" if a minimum value is present.';
-            $messages['meter-min-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Min. Value Text" message if a minimum value is present.';
-            $messages['meter-max-value-header.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Header" if a maximum value is present.';
-            $messages['meter-max-value-text.'.$key.'.required_without'] = 'Your meter (' . ($key+1) . ') must have a "Max Value Text" message if a maximum value is present.';
-        }
-
         $this->validate($request, $rules, $messages);
 
         $story = Story::findOrFail($id);
@@ -389,35 +365,6 @@ class StoryController extends Controller
         $story->success_content = $request->input('success-content');
 
         $story->save();
-
-        // Loop through each meter and save them after deleting any old meters.
-        Meter::where('story_id', '=', $story->id)->delete();
-
-        foreach ($request->get('meter-name') as $key => $val) {
-            $meter = new Meter;
-
-            $meter->story_id = $story->id;
-            $meter->order = $key+1;
-            $meter->name = $request->input('meter-name.'.$key);
-            $meter->type = $request->input('meter-type.'.$key);
-            $meter->start_value = $request->input('meter-start-value.'.$key);
-            if ($request->input('meter-no-min.'.$key) != 'true') {
-                $meter->min_value = $request->input('meter-min-value.'.$key); 
-            } else {
-                $meter->min_value = null; 
-            }
-            $meter->min_value_header = $request->input('meter-min-value-header.'.$key);
-            $meter->min_value_text = $request->input('meter-min-value-text.'.$key);
-            if ($request->input('meter-no-max.'.$key) != 'true') {
-                $meter->max_value = $request->input('meter-max-value.'.$key);
-            } else {
-                $meter->max_value = null; 
-            }
-            $meter->max_value_header = $request->input('meter-max-value-header.'.$key);
-            $meter->max_value_text = $request->input('meter-max-value-text.'.$key);
-
-            $meter->save();
-        }
 
         \Flash::success('Your story has been updated! You can <a href="/story/' . $story->id . '" target="_blank">view it</a> to see your changes.');
 

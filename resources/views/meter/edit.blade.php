@@ -145,7 +145,7 @@
                     type: "DELETE",
                     url: '/meter/' + id,
                     success: function(affectedRows) {
-                        if (affectedRows > 0) window.location.replace('/story/' + {{ $meter->story->id }} + '/edit#tab_meters');;
+                        if (affectedRows > 0) window.location.replace('/story/' + {{ $meter->story->id }} + '/edit#tab_meters');
                     }
                 });
             }

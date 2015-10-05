@@ -133,8 +133,6 @@ class MeterController extends Controller
      */
     public function destroy($id)
     {
-        $meter = Meter::find($id);
-
         $affectedRows = Meter::destroy($id);
 
         if ($affectedRows > 0) {

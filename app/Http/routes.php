@@ -29,6 +29,7 @@ Route::get('/story/{id}/introduction', 'IntroductionController@create');
 Route::get('introduction/{id}', 'IntroductionController@show');
 Route::get('/story/{id}/introduction/edit', 'IntroductionController@edit');
 Route::post('/story/{id}/introduction', 'IntroductionController@update');
+Route::delete('/introduction/{id}', 'IntroductionController@destroy');
 
 // Slides
 Route::get('/story/{id}/slide', 'SlideController@create');

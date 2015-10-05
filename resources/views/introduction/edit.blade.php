@@ -1,13 +1,14 @@
 @extends('framework')
 
 @section('header-include')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="/css/bootstrap-colorpicker.min.css">
 @stop
 
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
         <div class="navbar-right">
-            <a href="" class="navbar-btn btn btn-default" target="_blank">Delete</a>
+            <a href="javascript:deleteIntroduction('{{ $introduction->id }}')" class="navbar-btn btn btn-default" target="_blank">Delete</a>
             <a href="" class="navbar-btn btn btn-primary" id="save-button">Save</a>
         </div>
     </div>
@@ -111,5 +112,20 @@
             event.preventDefault();
             $( "#introduction-slide-form" ).submit();
         });
+
+        function deleteIntroduction(id) {
+            if (confirm('Delete this introduction slide?')) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "DELETE",
+                    url: '/introduction/' + id,
+                    success: function(affectedRows) {
+                        if (affectedRows > 0) window.location.replace('/story/' + {{ $introduction->story->id }} + '/edit');
+                    }
+                });
+            }
+        }
     </script>
 @stop

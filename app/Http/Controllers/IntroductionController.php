@@ -125,6 +125,14 @@ class IntroductionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $affectedRows = Introduction::destroy($id);
+
+        if ($affectedRows > 0) {
+            \Flash::info('The introduction slide has been deleted permanently.');
+        } else {
+            \Flash::error('The introduction slide could not be deleted.');
+        }
+
+        return $affectedRows;
     }
 }

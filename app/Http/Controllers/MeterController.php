@@ -133,6 +133,16 @@ class MeterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meter = Meter::find($id);
+
+        $affectedRows = Meter::destroy($id);
+
+        if ($affectedRows > 0) {
+            \Flash::info('The meter has been deleted permanently.');
+        } else {
+            \Flash::error('The meter could not be deleted.');
+        }
+
+        return $affectedRows;
     }
 }

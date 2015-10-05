@@ -48,6 +48,4 @@ Route::post('/choice/{id}/edit', 'ChoiceController@update');
 Route::get('/slide/{id}/meter', 'MeterController@create');
 Route::get('/meter/{id}/edit', 'MeterController@edit');
 Route::post('/meter/{id}', 'MeterController@update');
-
-// Route::resource('outcome', 'OutcomeController');
-// Route::resource('outcomeresults', 'OutcomeResultsController');
+Route::delete('/meter/{id}', 'MeterController@destroy');

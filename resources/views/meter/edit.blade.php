@@ -7,7 +7,7 @@
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
         <div class="navbar-right">
-            <a href="" class="navbar-btn btn btn-default" target="_blank">Delete</a>
+            <a href="javascript:deleteMeter('{{ $meter->id }}')" class="navbar-btn btn btn-default" target="_blank">Delete</a>
             <a href="" class="navbar-btn btn btn-primary" id="save-button">Save</a>
         </div>
     </div>
@@ -145,7 +145,7 @@
                     type: "DELETE",
                     url: '/meter/' + id,
                     success: function(affectedRows) {
-                        if (affectedRows > 0) location.reload();
+                        if (affectedRows > 0) window.location.replace('/story/' + {{ $meter->story->id }} + '/edit#tab_meters');;
                     }
                 });
             }

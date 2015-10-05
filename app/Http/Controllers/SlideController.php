@@ -211,15 +211,20 @@ class SlideController extends Controller
         $story = Story::findOrFail($id);
         $choice = Choice::findOrFail($choiceId);
         $slide = Slide::where('story_id', $story->id)->where('order', $order)->first();
+        $vignette = null;
 
         if ($choice->meter_effect == 'none') {
             if (count($story->slides()->get()) == $order) {
                 return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
             }
 
-            return redirect('/story/' . $story->id . '/' . ($order+1));
+            $outcome = Outcome::where('choice_id', $choice->id)->first();
+            $vignette = $outcome->vignette;
+
+            return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);;
         } elseif ($choice->meter_effect == 'specific') {
             $outcome = Outcome::where('choice_id', $choiceId)->first();
+            $vignette = $outcome->vignette;
 
             foreach ($outcome->results()->get() as $key => $result) {
                 $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
@@ -240,9 +245,10 @@ class SlideController extends Controller
                 return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
             }
 
-            return redirect('/story/' . $story->id . '/' . ($order+1));
+            return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);;
         } elseif ($choice->meter_effect == 'chance') {
             $outcome = Outcome::where('choice_id', $choiceId)->first();
+            $vignette = $outcome->vignette;
 
             if ($outcome->likelihood <= rand(1,100)) {
                 foreach ($outcome->results()->get() as $key => $result) {
@@ -251,6 +257,7 @@ class SlideController extends Controller
                 }
             } else {
                 $outcome = Outcome::where('choice_id', $choiceId)->orderBy('id', 'desc')->first();
+                $vignette = $outcome->vignette;
 
                 foreach ($outcome->results()->get() as $key => $result) {
                     $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
@@ -272,7 +279,7 @@ class SlideController extends Controller
                 return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
             }
 
-            return redirect('/story/' . $story->id . '/' . ($order+1));
+            return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);;
         }
     }
 }

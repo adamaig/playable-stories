@@ -32,15 +32,15 @@
 @stop
 
 @section('content')
-{{ Session::get('vignette') }}
-    @if (Session::has('vignette'))
+
+    @if (!empty(session('vignette')))
         <div class="modal modal-valign-center fade" id="vignette" tabindex="-1" role="dialog" aria-labelledby="vignetteLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body text-center">
                         <div class="row">
                             <div class="col-xs-12">
-                                {!! Session::pull('vignette') !!}
+                                {!! session('vignette') !!}
                             </div>
                         </div>
                         <div class="row">
@@ -73,9 +73,15 @@
             </div>
             <div class="row text-center">
                 @foreach ($slide->choices()->get() as $key => $choice)
-                    <div class="col-xs-12 col-sm-4 @if (($key+1) & 1) {{ 'col-sm-offset-2' }} @endif">
-                        <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
-                    </div>
+                    @if (count($slide->choices()->get()) == 3)
+                        <div class="col-xs-12 col-sm-4">
+                            <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
+                        </div>
+                    @else
+                        <div class="col-xs-12 col-sm-4 @if (($key+1) & 1) {{ 'col-sm-offset-2' }} @endif">
+                            <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
+                        </div>
+                    @endif
                 @endforeach
 
                 @if (count($slide->choices()->get()) == 0)

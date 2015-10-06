@@ -18,7 +18,7 @@
         </style>
     @endif
     <style>
-        .jumbotron-full-page {
+        .story-view .jumbotron {
             text-align: center;
             background-color: {{ $slide->story->background_color }};
         }

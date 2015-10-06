@@ -21,7 +21,7 @@
         .navbar {
             display: none;
         }
-        .jumbotron-full-page {
+        .story-view .jumbotron {
             background-color: {{ $introduction->background_color }};
             text-align: {{ $introduction->text_alignment }};
             @if (!empty($introduction->photo) && $introduction->photo_type == 'background')

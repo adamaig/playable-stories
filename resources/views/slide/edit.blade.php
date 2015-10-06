@@ -67,7 +67,7 @@
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="name">Slide Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $slide->name }}">
+                        <input type="text" class="form-control" id="name" name="name" value="@if (old('name')){{ old('name') }}@else{{ $slide->name }}@endif">
                     </div>
 
                     <div class="form-group">
@@ -77,7 +77,7 @@
 
                     <div class="form-group">
                         <label>Text</label>
-                        <textarea class="form-control wysiwyg" rows="3" name="content">{{ $slide->content }}</textarea>
+                        <textarea class="form-control wysiwyg" rows="3" name="content">@if (old('content')){{ old('content') }}@else{{ $slide->content }}@endif</textarea>
                     </div>
                 </div>
             </div>

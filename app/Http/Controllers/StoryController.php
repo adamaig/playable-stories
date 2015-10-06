@@ -345,7 +345,7 @@ class StoryController extends Controller
             'button-text-color' => 'required|hex',
         );
 
-        $this->validate($request, $rules, $messages);
+        $this->validate($request, $rules);
 
         $story = Story::findOrFail($id);
         $story->name = $request->input('story-name');

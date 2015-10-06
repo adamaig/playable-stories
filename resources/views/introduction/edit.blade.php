@@ -16,6 +16,7 @@
 
 @section('content')
     <div class="container">
+        @include('partials.input-errors')
         @include('flash::message')
         <p><a href="/story/{{ $introduction->story_id }}/edit"><i class="fa fa-angle-left"></i> Back to storyline</a></p>
         <form method="POST" action="/story/{{ $introduction->story->id }}/introduction" id="introduction-slide-form" enctype="multipart/form-data">

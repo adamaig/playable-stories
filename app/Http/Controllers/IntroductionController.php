@@ -85,7 +85,6 @@ class IntroductionController extends Controller
     {
         $rules = array(
             'heading' => 'required',
-            'message' => 'required',
             'text-alignment' => 'required|in:left,right,center,justify',
             'background-color' => 'required|hex',
             'photo' => 'image',

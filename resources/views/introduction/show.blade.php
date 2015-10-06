@@ -1,6 +1,22 @@
 @extends('framework-introduction')
 
 @section('header-include')
+    @if (!empty($introduction->story->heading_font))
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $introduction->story->heading_font }}">
+        <style>
+            h1,h2,h3,h4,h5,h6 {
+                font-family: {{ $fonts[$introduction->story->heading_font] }};
+            }
+        </style>
+    @endif
+    @if (!empty($introduction->story->body_font))
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $introduction->story->body_font }}">
+        <style>
+            body {
+                font-family: {{ $fonts[$introduction->story->body_font] }};
+            }
+        </style>
+    @endif
     <style>
         .navbar {
             display: none;

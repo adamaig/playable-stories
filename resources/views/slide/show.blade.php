@@ -1,6 +1,22 @@
 @extends('framework-slide')
     
 @section('header-include')
+    @if (!empty($slide->story->heading_font))
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $slide->story->heading_font }}">
+        <style>
+            h1,h2,h3,h4,h5,h6 {
+                font-family: {{ $fonts[$slide->story->heading_font] }};
+            }
+        </style>
+    @endif
+    @if (!empty($slide->story->body_font))
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $slide->story->body_font }}">
+        <style>
+            body {
+                font-family: {{ $fonts[$slide->story->body_font] }};
+            }
+        </style>
+    @endif
     <style>
         .jumbotron-full-page {
             text-align: center;

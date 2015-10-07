@@ -48,19 +48,21 @@
 @stop
 
 @section('content')
-    <div class="jumbotron jumbotron-full-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    @if (!empty($introduction->photo) && $introduction->photo_type == 'above')
-                        <img src="/img/introduction-photos/{{ $introduction->photo }}" alt="{{ $introduction->story->name }} Introduction" class="introduction-photo" />
-                    @endif
-                    <h1>{{ $introduction->heading }}</h1>
-                    {!! $introduction->message !!}
-                    <p><a class="btn btn-primary btn-lg" href="/story/{{ $introduction->story->id }}/1" role="button">Start the story...</a></p>
-                    @if (!empty($introduction->photo) && $introduction->photo_type == 'below')
-                        <img src="/img/introduction-photos/{{ $introduction->photo }}" alt="{{ $introduction->story->name }} Introduction" class="introduction-photo" />
-                    @endif
+    <div class="container-valign-center">
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @if (!empty($introduction->photo) && $introduction->photo_type == 'above')
+                            <img src="/img/introduction-photos/{{ $introduction->photo }}" alt="{{ $introduction->story->name }} Introduction" class="introduction-photo" />
+                        @endif
+                        <h1>{{ $introduction->heading }}</h1>
+                        {!! $introduction->message !!}
+                        <p><a class="btn btn-primary btn-lg" href="/story/{{ $introduction->story->id }}/1" role="button">Start the story...</a></p>
+                        @if (!empty($introduction->photo) && $introduction->photo_type == 'below')
+                            <img src="/img/introduction-photos/{{ $introduction->photo }}" alt="{{ $introduction->story->name }} Introduction" class="introduction-photo" />
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

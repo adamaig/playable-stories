@@ -6772,34 +6772,30 @@ button.close {
 .pull-none {
   float: none;
 }
-.text-valign-container {
+.container-valign-center {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
-  text-align: center;
-}
-.text-valign-container:before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-.text-valign-top {
-  display: inline-block;
-  vertical-align: top;
-  float: none;
-}
-.text-valign-center {
-  display: inline-block;
-  vertical-align: middle;
-  float: none;
-}
-.text-valign-bottom {
-  display: inline-block;
-  vertical-align: bottom;
-  float: none;
+  height: auto;
+  min-height: 100%;
+  display: -webkit-box;
+  /* iOS 6-, Safari 3.1-6 */
+  display: -webkit-flex;
+  /* Safari */
+  display: -ms-flexbox;
+  /* IE 10 */
+  display: flex;
+  -webkit-flex-direction: column;
+  /* Safari 6.1+ */
+  -ms-flex-direction: column;
+  /* IE 10 */
+  flex-direction: column;
+  -webkit-justify-content: center;
+  /* Safari 6.1+ */
+  -ms-flex-pack: center;
+  /* IE 10 */
+  justify-content: center;
 }
 @media (min-width: 768px) {
   .navbar-center {
@@ -6972,7 +6968,7 @@ fieldset[disabled] .btn-panel-transparent.active {
   background-color: transparent;
   border-color: rgba(255, 255, 255, 0.25);
 }
-.story-view .text-valign-center {
+.story-view .container-valign-center {
   padding-top: 80px;
   padding-bottom: 80px;
 }

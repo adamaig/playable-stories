@@ -18,8 +18,7 @@
         </style>
     @endif
     <style>
-        .story-view .jumbotron {
-            text-align: center;
+        .story-view {
             background-color: {{ $slide->story->background_color }};
         }
         #text-overlay, #slide-text, .jumbotron p {
@@ -69,40 +68,43 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
     @endif
-
-    <div class="jumbotron jumbotron-full-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    @if (!empty($slide->image))
-                        <div id="slide-image-container">
-                            @if ($slide->text_placement == 'overlay')
-                                <div id="text-overlay">{!! $slide->content !!}</div>
+    <div class="text-valign-container">
+        <div class="text-valign-center">
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @if (!empty($slide->image))
+                                <div id="slide-image-container">
+                                    @if ($slide->text_placement == 'overlay')
+                                        <div id="text-overlay">{!! $slide->content !!}</div>
+                                    @endif
+                                    <img src="/img/slide-photos/{{ $slide->image }}" id="slide-image" alt="" />
+                                </div>
                             @endif
-                            <img src="/img/slide-photos/{{ $slide->image }}" id="slide-image" alt="" />
+                            @if (empty($slide->image) || $slide->text_placement == 'under')
+                                <div id="slide-text">{!! $slide->content !!}</div>
+                            @endif
                         </div>
-                    @endif
-                    @if (empty($slide->image) || $slide->text_placement == 'under')
-                        <div id="slide-text">{!! $slide->content !!}</div>
-                    @endif
+                    </div>
+                    <div class="row text-center">
+                        @foreach ($slide->choices()->get() as $key => $choice)
+                            @if (count($slide->choices()->get()) == 3)
+                                <div class="col-xs-12 col-sm-4">
+                                    <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
+                                </div>
+                            @else
+                                <div class="col-xs-12 col-sm-4 @if (($key+1) & 1) {{ 'col-sm-offset-2' }} @endif">
+                                    <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
+                                </div>
+                            @endif
+                        @endforeach
+        
+                        @if (count($slide->choices()->get()) == 0)
+                            <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                        @endif
+                    </div>
                 </div>
-            </div>
-            <div class="row text-center">
-                @foreach ($slide->choices()->get() as $key => $choice)
-                    @if (count($slide->choices()->get()) == 3)
-                        <div class="col-xs-12 col-sm-4">
-                            <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
-                        </div>
-                    @else
-                        <div class="col-xs-12 col-sm-4 @if (($key+1) & 1) {{ 'col-sm-offset-2' }} @endif">
-                            <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
-                        </div>
-                    @endif
-                @endforeach
-
-                @if (count($slide->choices()->get()) == 0)
-                    <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
-                @endif
             </div>
         </div>
     </div>

@@ -6778,6 +6778,7 @@ button.close {
   left: 0;
   height: 100%;
   width: 100%;
+  text-align: center;
 }
 .text-valign-container:before {
   content: "";
@@ -6971,13 +6972,13 @@ fieldset[disabled] .btn-panel-transparent.active {
   background-color: transparent;
   border-color: rgba(255, 255, 255, 0.25);
 }
-.story-view {
+.story-view .text-valign-center {
   padding-top: 80px;
   padding-bottom: 80px;
 }
 .story-view .jumbotron {
   margin: 0;
-  padding: 0;
+  background-color: transparent;
 }
 .panel-no-body .panel-heading {
   border-bottom: 0;

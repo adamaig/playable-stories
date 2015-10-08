@@ -408,8 +408,24 @@ class SlideController extends Controller
         $originalSlideOrder = $slide->order;
 
         if ($direction == 'down') {
+            if ($slide->order == 1) {
+                return redirect('/story/' . $slide->story->id . '/edit');
+            }
+
+            $oldSlide = Slide::where('story_id', $slide->story->id)->where('order', $originalSlideOrder - 1)->first();
+            $oldSlide->order = $originalSlideOrder;
+            $oldSlide->save();
+
             $slide->order = ($slide->order - 1);
         } elseif ($direction == 'up') {
+            if ($slide->order == count($slide->story->slides()->get())) {
+                return redirect('/story/' . $slide->story->id . '/edit');
+            }
+
+            $oldSlide = Slide::where('story_id', $slide->story->id)->where('order', $originalSlideOrder + 1)->first();
+            $oldSlide->order = $originalSlideOrder;
+            $oldSlide->save();
+
             $slide->order = ($slide->order + 1);
         }
         $slide->save();

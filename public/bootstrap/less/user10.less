@@ -15,26 +15,28 @@
 }
 
 // Vertical alignment container
-.container-valign-center {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    
-    display: -webkit-box; /* iOS 6-, Safari 3.1-6 */
-    display: -webkit-flex; /* Safari */
-    display: -ms-flexbox; /* IE 10 */
-    display: flex;
-    
-    -webkit-flex-direction: column; /* Safari 6.1+ */
-    -ms-flex-direction: column; /* IE 10 */
-    flex-direction: column;
-    
-    -webkit-justify-content: center; /* Safari 6.1+ */
-    -ms-flex-pack: center; /* IE 10 */
-    justify-content: center;
+@media (min-width: 768px) {
+    .container-valign-center {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        
+        display: -webkit-box; /* iOS 6-, Safari 3.1-6 */
+        display: -webkit-flex; /* Safari */
+        display: -ms-flexbox; /* IE 10 */
+        display: flex;
+        
+        -webkit-flex-direction: column; /* Safari 6.1+ */
+        -ms-flex-direction: column; /* IE 10 */
+        flex-direction: column;
+        
+        -webkit-justify-content: center; /* Safari 6.1+ */
+        -ms-flex-pack: center; /* IE 10 */
+        justify-content: center;
+    }
 }
 
 // Centered items in the navbar
@@ -150,6 +152,11 @@
     max-width: 100%;
 }
 
+// Add space between rows that follow one another
+.row + .row {
+    margin-top: 20px;
+}
+
 
 
 // Custom styles
@@ -169,19 +176,43 @@
 
 // Top and bottom navbars on the story view
 .story-view .navbar {
-    background-color: transparent;
     border-color: rgba(255, 255, 255, .25);
 }
-
-// Jumbotron on slides
-.story-view .container-valign-center {
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
-    .story-view .jumbotron {
-        margin: 0;
-        background-color: transparent;
+    .story-view .navbar-fixed-bottom {
+        font-size: 90%;
+        min-height: 40px;
     }
+    .story-view .navbar-text {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+@media (min-width: 768px) {
+    .story-view .navbar-text {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+@media (max-width: 767px) {
+    .story-view .navbar-fixed-bottom {
+        position: relative;
+    }
+}
+
+// Slide content
+.story-view .container-valign-center {
+    padding-top: 102px; /* Navbar height + 30px */
+    padding-bottom: 102px; /* Navbar height + 30px */
+}
+@media (max-width: 767px) {
+    .story-view .container-valign-center {
+        padding-bottom: 30px;
+    }
+}
+
+// Buttons
+.story-view .btn {
+    border: none;
+}
 
 
 //== Admin view

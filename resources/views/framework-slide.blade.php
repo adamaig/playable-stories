@@ -16,6 +16,16 @@
         
         <link rel="stylesheet" href="/css/app.css">
         
+        <style>
+            /* Format the meter styles with the global story styles. */
+            .navbar-default .navbar-text {
+                color: {{ $slide->story->body_font_color}};
+            }
+            .navbar-fixed-top .navbar-text .lead {
+                color: {{ $slide->story->link_color}};
+            }
+        </style>
+        
         @yield('header-include')
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,7 +54,7 @@
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container">
                 <div class="navbar-center">
-                    <p class="navbar-text text-center"><span class="lead">Playable Stories</span><br /><a href="/">Exit</a></p>
+                    <p class="navbar-text text-center"><a href="/">Exit</a>&nbsp;&nbsp;/&nbsp;&nbsp;Built with Playable Stories</p>
                 </div>
             </div>
         </nav>

@@ -41,10 +41,22 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-left">
-                    <p class="navbar-text">{{ Session::get('story-'.$slide->story->id.'-meter-1-name') }}<br /><span class="lead">${{ Session::get('story-'.$slide->story->id.'-meter-1-value') }}</span></p>
+                    <p class="navbar-text">
+                        {{ Session::get('story-'.$slide->story->id.'-meter-1-name') }}
+                        <br />
+                        <span class="lead">
+                            @if ( Session::get('story-'.$slide->story->id.'-meter-1-type') == 'currency' ) {{ '$' }}@endif{{ Session::get('story-'.$slide->story->id.'-meter-1-value') }}@if ( Session::get('story-'.$slide->story->id.'-meter-1-type') == 'percentage' ){{ '%' }} @endif
+                        </span>
+                    </p>
                 </div>
                 <div class="navbar-right">
-                    <p class="navbar-text text-right">{{ Session::get('story-'.$slide->story->id.'-meter-2-name') }}<br /><span class="lead">{{ Session::get('story-'.$slide->story->id.'-meter-2-value') }}</span></p>
+                    <p class="navbar-text text-right">
+                        {{ Session::get('story-'.$slide->story->id.'-meter-2-name') }}
+                        <br />
+                        <span class="lead">
+                            @if ( Session::get('story-'.$slide->story->id.'-meter-2-type') == 'currency' ) {{ '$' }}@endif{{ Session::get('story-'.$slide->story->id.'-meter-2-value')}}@if ( Session::get('story-'.$slide->story->id.'-meter-2-type') == 'percentage' ){{ '%' }} @endif
+                        </span>
+                    </p>
                 </div>
             </div>
         </nav>

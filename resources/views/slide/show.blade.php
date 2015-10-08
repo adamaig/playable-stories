@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $slide->story->heading_font }}">
         <style>
             h1, h2, h3, h4, h5, h6 {
-                font-family: {{ $fonts[$slide->story->heading_font] }};
+                font-family: '{{ $fonts[$slide->story->heading_font] }}';
             }
         </style>
     @endif
@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $slide->story->body_font }}">
         <style>
             body {
-                font-family: {{ $fonts[$slide->story->body_font] }};
+                font-family: '{{ $fonts[$slide->story->body_font] }}';
             }
         </style>
     @endif
@@ -89,7 +89,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+                                <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal">Continue</button>
                             </div>
                         </div>
                     </div>

@@ -5944,8 +5944,8 @@ button.close {
   filter: alpha(opacity=0);
 }
 .modal-backdrop.in {
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+  opacity: 0.9;
+  filter: alpha(opacity=90);
 }
 .modal-header {
   padding: 15px;
@@ -7000,6 +7000,22 @@ fieldset[disabled] .btn-panel-transparent.active {
 @media (max-width: 767px) {
   .story-view .container-valign-center {
     padding-bottom: 30px;
+  }
+}
+.modal-body {
+  padding: 30px;
+}
+@media (min-width: 767px) {
+  .modal-body {
+    font-size: 120%;
+  }
+}
+@media (min-width: 992px) {
+  .modal-dialog {
+    width: 900px;
+  }
+  .modal-body {
+    padding: 60px 40px;
   }
 }
 .story-view .btn {

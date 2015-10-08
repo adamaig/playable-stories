@@ -88,7 +88,9 @@
                         <label>Text Placement</label>
                         <select class="form-control" name="text-placement">
                             <option value="overlay" @if ($slide->text_placement == 'overlay') {{ 'selected' }} @endif>Overlay</option>
-                            <option value="under" @if ($slide->text_placement == 'under') {{ 'selected' }} @endif>Under Image</option>
+                            <option value="under" @if ($slide->text_placement == 'under') {{ 'selected' }} @endif>Image Top / Text Bottom</option>
+                            <option value="right" @if ($slide->text_placement == 'under') {{ 'selected' }} @endif>Image Left / Text Right</option>
+                            <option value="left" @if ($slide->text_placement == 'under') {{ 'selected' }} @endif>Image Right / Text Left</option>
                         </select>
                     </div>
 

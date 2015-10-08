@@ -316,7 +316,7 @@ class SlideController extends Controller
             'name' => 'required',
             'image' => 'image',
             'content' => 'required',
-            'text-placement' => 'required|in:overlay,under',
+            'text-placement' => 'required|in:overlay,under,left,right',
             'text-alignment' => 'required|in:left,right,center,justify',
         );
 

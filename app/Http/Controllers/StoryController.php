@@ -76,9 +76,11 @@ class StoryController extends Controller
         foreach ($story->meters()->get() as $key => $meter) {
             Session::forget('story-'.$story->id.'-meter-'.($key+1).'-value');
             Session::forget('story-'.$story->id.'-meter-'.($key+1).'-name');
+            Session::forget('story-'.$story->id.'-meter-'.($key+1).'-type');
 
             Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $meter->start_value);
             Session::put('story-'.$story->id.'-meter-'.($key+1).'-name', $meter->name);
+            Session::put('story-'.$story->id.'-meter-'.($key+1).'-type', $meter->type);
         }
 
         if (count($story->introductions()->get()) == 0) {

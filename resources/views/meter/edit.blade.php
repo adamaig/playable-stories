@@ -135,7 +135,31 @@
             event.preventDefault();
             $( "#meter-form" ).submit();
         });
-
+        
+        // Change the meter type symbol ($, %, or #) when the select dropdown is changed
+        function changeMeterTypeSymbol() {
+            switch( $('select[name=meter-type]').val() ) {
+                case 'currency':
+                    $symbol = '$';
+                    break;
+                case 'percentage':
+                    $symbol = '%';
+                    break;
+                default:
+                    $symbol = '#';
+            }
+            $('input[name=meter-start-value]').next('.input-group-addon').text($symbol);
+            $('input[name=meter-min-value]').next('.input-group-addon').text($symbol);
+            $('input[name=meter-max-value]').next('.input-group-addon').text($symbol);
+        }
+        
+        $('select[name=meter-type]').change(changeMeterTypeSymbol);
+        $(document).ready(function () {
+            changeMeterTypeSymbol();
+        });
+        
+        
+        
         function deleteMeter(id) {
             if (confirm('Delete this meter?')) {
                 $.ajax({

@@ -44,7 +44,7 @@
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container">
                 <div class="navbar-center">
-                    <p class="navbar-text text-center"><span class="lead">Playable Stories</span><br /><a href="/">Exit</a></p>
+                    <p class="navbar-text text-center">Powered by <a href="/">Playable Stories</a></p>
                 </div>
             </div>
         </nav>

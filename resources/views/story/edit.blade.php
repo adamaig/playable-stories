@@ -129,11 +129,11 @@
                                     <div class="form-group">
                                         <label for="heading-font">Heading Font</label>
                                         <select class="form-control" name="heading-font" id="heading-font">
-                                            @foreach ($fonts as $value=>$name)
-                                                @if ($story->heading_font == $value)
-                                                    <option value="{{ $value }}" selected>{{ $name }}</option>
+                                            @foreach ( $fonts as $key => $value )
+                                                @if ( $story->heading_font == $key )
+                                                    <option value="{{ $key }}" selected>{{ $key }}</option>
                                                 @else
-                                                    <option value="{{ $value }}">{{ $name }}</option>
+                                                    <option value="{{ $key }}">{{ $key }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -155,11 +155,11 @@
                                     <div class="form-group">
                                         <label for="body-font">Body Font</label>
                                         <select class="form-control" name="body-font" id="body-font">
-                                            @foreach ($fonts as $value=>$name)
-                                                @if ($story->body_font == $value)
-                                                    <option value="{{ $value }}" selected>{{ $name }}</option>
+                                            @foreach ( $fonts as $key => $value )
+                                                @if ( $story->body_font == $key )
+                                                    <option value="{{ $key }}" selected>{{ $key }}</option>
                                                 @else
-                                                    <option value="{{ $value }}">{{ $name }}</option>
+                                                    <option value="{{ $key }}">{{ $key }}</option>
                                                 @endif
                                             @endforeach
                                         </select>

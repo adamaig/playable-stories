@@ -2,18 +2,20 @@
 
 @section('header-include')
     @if (!empty($introduction->story->heading_font))
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $introduction->story->heading_font }}">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$introduction->story->heading_font]['link_code'] }}">
         <style>
             h1,h2,h3,h4,h5,h6 {
-                font-family: '{{ $fonts[$introduction->story->heading_font] }}';
+                font-family: '{{ $fonts[$introduction->story->heading_font]['css_name'] }}';
+                font-weight: {{ $fonts[$introduction->story->heading_font]['weight'] }};
             }
         </style>
     @endif
     @if (!empty($introduction->story->body_font))
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $introduction->story->body_font }}">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$introduction->story->body_font]['link_code'] }}">
         <style>
             body {
-                font-family: '{{ $fonts[$introduction->story->body_font] }}';
+                font-family: '{{ $fonts[$introduction->story->body_font]['css_name'] }}';
+                font-weight: {{ $fonts[$introduction->story->body_font]['weight'] }};
             }
         </style>
     @endif

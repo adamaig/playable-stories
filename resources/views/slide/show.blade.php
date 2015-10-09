@@ -1,22 +1,26 @@
 @extends('framework-slide')
     
 @section('header-include')
+
     @if (!empty($slide->story->heading_font))
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $slide->story->heading_font }}">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$slide->story->heading_font]['link_code'] }}">
         <style>
-            h1, h2, h3, h4, h5, h6 {
-                font-family: '{{ $fonts[$slide->story->heading_font] }}';
+            h1,h2,h3,h4,h5,h6 {
+                font-family: '{{ $fonts[$slide->story->heading_font]['css_name'] }}';
+                font-weight: {{ $fonts[$$slide->story->heading_font]['weight'] }};
             }
         </style>
     @endif
     @if (!empty($slide->story->body_font))
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $slide->story->body_font }}">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$slide->story->body_font]['link_code'] }}">
         <style>
             body {
-                font-family: '{{ $fonts[$slide->story->body_font] }}';
+                font-family: '{{ $fonts[$slide->story->body_font]['css_name'] }}';
+                font-weight: {{ $fonts[$slide->story->body_font]['weight'] }};
             }
         </style>
     @endif
+    
     <style>
         /* Background color and font sizes/colors/alignment */
         body {
@@ -68,8 +72,9 @@
                 position: absolute;
                 padding: 15px;
             }
-        @endif    
+        @endif
     </style>
+    
 @stop
 
 @section('content')

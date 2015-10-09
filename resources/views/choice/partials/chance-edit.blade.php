@@ -27,7 +27,7 @@
                 @endforeach
             </div>
             @foreach ($choice->outcomes()->get() as $key => $outcome)
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     <div class="form-group">
                         <label>Outcome {{ $key+1 }} (+ or -)</label>
                         @foreach ($outcome->results()->get() as $resultKey => $result)

@@ -22,7 +22,6 @@
         body {
             background-color: {{ $introduction->background_color }};
             font-size: {{ $introduction->story->body_font_size}}px;
-            text-align: {{ $introduction->text_alignment }};
             color: {{ $introduction->story->body_font_color}};
         }
         a, a:hover, a:visited, a:active, a:link {
@@ -91,7 +90,6 @@
                         @if (!empty($introduction->photo) && $introduction->photo_type == 'above')
                             <img src="/img/introduction-photos/{{ $introduction->photo }}" alt="{{ $introduction->story->name }} Introduction" class="introduction-photo" />
                         @endif
-                        <h1>{{ $introduction->heading }}</h1>
                         {!! $introduction->message !!}
                     </div>
                 </div>

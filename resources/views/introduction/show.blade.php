@@ -97,7 +97,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <p><a class="btn btn-primary btn-lg" href="/story/{{ $introduction->story->id }}/1" role="button">Start the story...</a></p>
+                        <p><a class="btn btn-primary btn-lg" href="/story/{{ $introduction->story->id }}/1" role="button">Start</a></p>
                     </div>
                 </div>
                 @if (!empty($introduction->photo) && $introduction->photo_type == 'below')

@@ -33,6 +33,11 @@
                 elementpath: false,
                 statusbar: false,
                 menubar: false,
+                plugins: [
+                    "link", "autoresize",
+                ],
+                toolbar: 'formatselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link',
+                fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 21pt 24pt 32pt 36pt",
             });
         });
 

@@ -23,11 +23,6 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="heading">Header Text</label>
-                        <input type="text" class="form-control" id="heading" name="heading" value="{{ $introduction->heading }}">
-                    </div>
-
-                    <div class="form-group">
                         <label>Introduction Message</label>
                         <textarea class="form-control wysiwyg" rows="3" name="message">{{ $introduction->message }}</textarea>
                     </div>
@@ -36,16 +31,6 @@
 
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        <label>Text Alignment</label>
-                        <select class="form-control" name="text-alignment">
-                            <option value="left" @if ($introduction->text_alignment == 'left') {{ 'selected' }} @endif>Left</option>
-                            <option value="right" @if ($introduction->text_alignment == 'right') {{ 'selected' }} @endif>Right</option>
-                            <option value="center" @if ($introduction->text_alignment == 'center') {{ 'selected' }} @endif>Centered</option>
-                            <option value="justify" @if ($introduction->text_alignment == 'justify') {{ 'selected' }} @endif>Justified</option>
-                        </select>
-                    </div>
-
                     <div class="form-group">
                         <label for="background-color">Background Color</label>
                         <div class="input-group background-color">

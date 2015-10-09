@@ -147,6 +147,18 @@
     width: 100%;
 }
 
+// Better side margins on mobile
+.container {
+    padding-right: 10%;
+    padding-left: 10%;
+}
+@media (min-width: 768px) {
+    .container {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
 // Keep images constrained when inside a .container
 .container img {
     max-width: 100%;
@@ -155,6 +167,13 @@
 // Add space between rows that follow one another
 .row + .row {
     margin-top: 20px;
+}
+
+// Add space between stacked col-xs-12's on mobile
+@media (max-width: 767px) {
+    .col-xs-12 + .col-xs-12 {
+        margin-top: 20px;
+    }
 }
 
 
@@ -207,6 +226,12 @@
     .story-view .container-valign-center {
         padding-bottom: 30px;
     }
+    .story-view {
+        text-align: center; // Default center alignment on all mobile text.
+    }
+        .story-view ul {
+            text-align: left; // Don't ever center bullets... that's just dumb.
+        }
 }
 
 // Modals

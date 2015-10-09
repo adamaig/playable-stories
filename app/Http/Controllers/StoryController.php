@@ -203,6 +203,16 @@ class StoryController extends Controller
                 'css_name' => 'Roboto',
                 'weight' => 700,
             ),
+            'Roboto Condensed' => array(
+                'link_code' => 'Roboto+Condensed:400,400italic',
+                'css_name' => 'Roboto Condensed',
+                'weight' => 400,
+            ),
+            'Roboto Condensed Bold' => array(
+                'link_code' => 'Roboto+Condensed:700,700italic',
+                'css_name' => 'Roboto Condensed',
+                'weight' => 700,
+            ),
             'Roboto Slab (No natural italic)' => array(
                 'link_code' => 'Roboto+Slab:400,400italic',
                 'css_name' => 'Roboto Slab',

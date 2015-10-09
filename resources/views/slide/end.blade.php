@@ -7,7 +7,7 @@
         <style>
             h1,h2,h3,h4,h5,h6 {
                 font-family: '{{ $fonts[$slide->story->heading_font]['css_name'] }}';
-                font-weight: {{ $fonts[$$slide->story->heading_font]['weight'] }};
+                font-weight: {{ $fonts[$slide->story->heading_font]['weight'] }};
             }
         </style>
     @endif

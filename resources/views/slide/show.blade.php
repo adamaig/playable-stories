@@ -146,16 +146,20 @@
                         </div>
                         <div id="slide-text" class="col-xs-12 col-sm-6 @if ($slide->text_placement == 'left') {{ 'col-sm-pull-6' }} @endif">
                             <div class="row">
-                                {!! $slide->content !!}
+                                <div class="col-xs-12">
+                                    {!! $slide->content !!}
+                                </div>
                             </div>
                             <div class="row">
-                                @if (count($slide->choices()->get()) == 0)
-                                    <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
-                                @else
-                                    @foreach ($slide->choices()->get() as $key => $choice)
-                                        <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
-                                    @endforeach
-                                @endif
+                                <div class="col-xs-12">
+                                    @if (count($slide->choices()->get()) == 0)
+                                        <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                                    @else
+                                        @foreach ($slide->choices()->get() as $key => $choice)
+                                            <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

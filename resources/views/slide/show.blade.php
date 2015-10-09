@@ -27,9 +27,6 @@
             .navbar {
                 background-color: {{ $slide->story->background_color }};
             }
-            main {
-                text-align: {{ $slide->text_alignment }};
-            }
         
         a, a:hover, a:visited, a:active, a:link {
             color: {{ $slide->story->link_color}};

@@ -8,8 +8,8 @@
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
         <div class="navbar-right">
-            <a href="/story/{{ $story->id }}" class="navbar-btn btn btn-default" target="_blank">View</a>
-            <a href="" class="navbar-btn btn btn-primary" id="save-button">Save</a>
+            <a href="/story/{{ $story->id }}" class="btn btn-sm btn-default navbar-btn" target="_blank">View</a>
+            <a href="" class="btn btn-sm btn-primary navbar-btn" id="save-button">Save</a>
         </div>
     </div>
 @stop
@@ -52,7 +52,7 @@
                                     </div>
                                 @endforeach
                             @endif
-                            
+                            <hr />
                             @foreach ($story->slides()->get() as $slide)
                                 <div class="panel panel-default panel-no-body">
                                     <div class="panel-heading">

@@ -7,7 +7,7 @@
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
         <div class="navbar-right">
-            <a href="/story/create" class="navbar-right navbar-btn btn btn-primary">New Story</a>
+            <a href="/story/create" class="btn btn-sm btn-primary navbar-btn">New Story</a>
         </div>
     </div>
 @stop
@@ -29,7 +29,7 @@
                             <h4>{{ $story->name }}</h4>
                             View at: <a href="/story/{{ $story->id }}" target="_blank">{{ getenv('APP_URL') }}/story/{{ $story->id }}</a>
                         </div>
-                        <div class="btn-group btn-group-lg pull-right" role="group" aria-label="...">
+                        <div class="btn-group pull-right" role="group" aria-label="...">
                             <a class="btn btn-default" href="/story/{{ $story->id }}/edit">Edit</a>
                             <a class="btn btn-default">Duplicate</a>
                             <a class="btn btn-default" href="javascript:deleteStory('{{ $story->id }}')">Delete</a>

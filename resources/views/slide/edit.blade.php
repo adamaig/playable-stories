@@ -93,17 +93,6 @@
                             <option value="left" @if ($slide->text_placement == 'left') {{ 'selected' }} @endif>Image Right / Text Left</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label>Text Alignment</label>
-                        <select class="form-control" name="text-alignment">
-                            <option value="left" @if ($slide->text_alignment == 'left') {{ 'selected' }} @endif>Left</option>
-                            <option value="right" @if ($slide->text_alignment == 'right') {{ 'selected' }} @endif>Right</option>
-                            <option value="center" @if ($slide->text_alignment == 'center') {{ 'selected' }} @endif>Centered</option>
-                            <option value="justify" @if ($slide->text_alignment == 'justify') {{ 'selected' }} @endif>Justified</option>
-                        </select>
-                    </div>
-
                 </div>
             </div>
             <p>Add Up to 4 Choices:<br/>If no choice is selected the slide will advance with a single continue button.</p>

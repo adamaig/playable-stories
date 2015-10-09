@@ -1582,12 +1582,12 @@ pre code {
 }
 @media (min-width: 992px) {
   .container {
-    width: 900px;
+    width: 930px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    width: 900px;
+    width: 930px;
   }
 }
 .container-fluid {
@@ -6956,11 +6956,26 @@ fieldset[disabled] .btn-panel-transparent.active {
 .container .container {
   width: 100%;
 }
+.container {
+  padding-right: 10%;
+  padding-left: 10%;
+}
+@media (min-width: 768px) {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
 .container img {
   max-width: 100%;
 }
 .row + .row {
   margin-top: 20px;
+}
+@media (max-width: 767px) {
+  .col-xs-12 + .col-xs-12 {
+    margin-top: 20px;
+  }
 }
 .navbar-left {
   float: left !important;
@@ -7000,6 +7015,12 @@ fieldset[disabled] .btn-panel-transparent.active {
 @media (max-width: 767px) {
   .story-view .container-valign-center {
     padding-bottom: 30px;
+  }
+  .story-view {
+    text-align: center;
+  }
+  .story-view ul {
+    text-align: left;
   }
 }
 .modal-body {

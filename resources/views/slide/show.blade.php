@@ -103,21 +103,23 @@
             <div class="container">
                 
                 @if ($slide->text_placement == 'overlay' || $slide->text_placement == 'under')
-                    <div class="row">
-                        <div class="col-xs-12">
-                            @if (!empty($slide->image))
-                                <div id="slide-image-container">
-                                    @if ($slide->text_placement == 'overlay')
-                                        <div id="text-overlay">{!! $slide->content !!}</div>
-                                    @endif
-                                    <img src="/img/slide-photos/{{ $slide->image }}" id="slide-image" alt="" />
-                                </div>
-                            @endif
-                            @if (empty($slide->image) || $slide->text_placement == 'under')
-                                <div id="slide-text">{!! $slide->content !!}</div>
-                            @endif
+                    @if (!empty($slide->image))
+                        <div class="row">
+                            <div id="slide-image-container" class="col-xs-12">
+                                @if ($slide->text_placement == 'overlay')
+                                    <div id="text-overlay">{!! $slide->content !!}</div>
+                                @endif
+                                <img src="/img/slide-photos/{{ $slide->image }}" id="slide-image" alt="" />
+                            </div>
                         </div>
-                    </div>
+                    @endif
+                    @if (empty($slide->image) || $slide->text_placement == 'under')
+                        <div class="row">
+                            <div id="slide-text" class="col-xs-12">
+                                {!! $slide->content !!}
+                            </div>
+                        </div>
+                    @endif
                     <div class="row text-center">
                         @foreach ($slide->choices()->get() as $key => $choice)
                             @if (count($slide->choices()->get()) == 3)

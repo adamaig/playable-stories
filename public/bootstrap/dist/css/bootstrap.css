@@ -7041,6 +7041,7 @@ fieldset[disabled] .btn-panel-transparent.active {
 }
 .story-view .btn {
   border: none;
+  min-width: 200px;
 }
 .panel-no-body .panel-heading {
   border-bottom: 0;

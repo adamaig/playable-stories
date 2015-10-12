@@ -234,7 +234,7 @@ class SlideController extends Controller
             'name' => 'required',
             'image' => 'image',
             'content' => 'required',
-            'text-placement' => 'required|in:overlay,under,left,right',
+            'text-placement' => 'required|in:under,left,right',
         );
 
         $this->validate($request, $rules);

@@ -56,23 +56,6 @@
                 opacity: 1.0;
                 filter: alpha(opacity=100); /* For IE8 and earlier */
             }
-        
-        /* Text overlaying image */
-        @if ($slide->text_placement == 'overlay')
-            #slide-image-container {
-                display: inline-block;
-                position: relative;
-                background: url('/img/slide-photos/{{ $slide->image }}') no-repeat;
-                background-size: contain;
-            }
-            #slide-image {
-                opacity: 0;
-            }
-            #text-overlay {
-                position: absolute;
-                padding: 15px;
-            }
-        @endif
     </style>
     
 @stop
@@ -104,13 +87,10 @@
         <div class="container-valign-center">
             <div class="container">
                 
-                @if ($slide->text_placement == 'overlay' || $slide->text_placement == 'under')
+                @if ($slide->text_placement == 'under')
                     @if (!empty($slide->image))
                         <div class="row">
                             <div id="slide-image-container" class="col-xs-12">
-                                @if ($slide->text_placement == 'overlay')
-                                    <div id="text-overlay">{!! $slide->content !!}</div>
-                                @endif
                                 <img src="/img/slide-photos/{{ $slide->image }}" id="slide-image" alt="" />
                             </div>
                         </div>

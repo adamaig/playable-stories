@@ -7,7 +7,6 @@
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
         <div class="navbar-right">
-            <a href="" class="navbar-btn btn btn-sm btn-default" target="_blank">Delete</a>
             <a href="" class="navbar-btn btn btn-sm btn-primary" id="save-button">Save</a>
         </div>
     </div>

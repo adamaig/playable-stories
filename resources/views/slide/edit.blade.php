@@ -9,7 +9,6 @@
         <div class="navbar-right">
             <a href="" class="navbar-btn btn btn-sm btn-default" target="_blank">Delete</a>
             <a href="" class="navbar-btn btn btn-sm btn-primary" id="save-button">Save</a>
-            <a href="" class="navbar-btn btn btn-sm btn-primary" >Preview</a>
         </div>
     </div>
 @stop

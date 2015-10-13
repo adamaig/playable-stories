@@ -223,6 +223,7 @@ class IntroductionController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
+            'text-alignment' => 'required|in:left,right,center',
             'message' => 'required',
             'background-color' => 'required|hex',
             'photo' => 'image',
@@ -234,6 +235,7 @@ class IntroductionController extends Controller
 
         $introduction = Introduction::where('story_id', '=', $id)->firstOrFail();
         $introduction->message = $request->input('message');
+        $introduction->text_alignment = $request->input('text-alignment');
         $introduction->background_color = $request->input('background-color');
         $introduction->photo_type = $request->input('photo-type');
         $introduction->background_placement = $request->input('background-placement');

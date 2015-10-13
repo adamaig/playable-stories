@@ -235,6 +235,7 @@ class SlideController extends Controller
             'image' => 'image',
             'content' => 'required',
             'text-placement' => 'required|in:under,left,right',
+            'text-alignment' => 'required|in:left,right,center',
         );
 
         $this->validate($request, $rules);
@@ -243,6 +244,7 @@ class SlideController extends Controller
         $slide->name = $request->input('name');
         $slide->content = $request->input('content');
         $slide->text_placement = $request->input('text-placement');
+        $slide->text_alignment = $request->input('text-alignment');
 
         // Save photo
         if ($request->file('image')) {
@@ -303,6 +305,7 @@ class SlideController extends Controller
         $newSlide->image = $slide->image;
         $newSlide->content = $slide->content;
         $newSlide->text_placement = $slide->text_placement;
+        $newSlide->text_alignment = $slide->text_alignment;
         $newSlide->save();
 
         \Flash::success('The slide has been duplicated and added to the end of your story.');

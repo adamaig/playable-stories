@@ -35,6 +35,10 @@
         a, a:hover, a:visited, a:active, a:link {
             color: {{ $slide->story->link_color}};
         }
+
+        .container {
+            text-align: {{ $slide->text_alignment }};
+        }
         
         /* Buttons */
         .btn-primary,

@@ -32,6 +32,15 @@
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <div class="form-group">
+                        <label>Text Alignment</label>
+                        <select class="form-control" name="text-alignment">
+                            <option value="left" @if ($introduction->text_alignment == 'left') {{ 'selected' }} @endif>Left</option>
+                            <option value="right" @if ($introduction->text_alignment == 'right') {{ 'selected' }} @endif>Right</option>
+                            <option value="center" @if ($introduction->text_alignment == 'center') {{ 'selected' }} @endif>Centered</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="background-color">Background Color</label>
                         <div class="input-group background-color">
                             <span class="input-group-addon"><i></i></span>

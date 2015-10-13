@@ -8,6 +8,9 @@
                 font-family: '{{ $fonts[$introduction->story->heading_font]['css_name'] }}';
                 font-weight: {{ $fonts[$introduction->story->heading_font]['weight'] }};
             }
+            .container {
+                text-align: {{ $introduction->text_alignment }};
+            }
         </style>
     @endif
     @if (!empty($introduction->story->body_font))

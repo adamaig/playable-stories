@@ -587,7 +587,7 @@ class SlideController extends Controller
         
         if ($choice->meter_effect == 'none') {
             if (count($story->slides()->get()) == $order) {
-                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story);
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
             }
 
             $outcome = Outcome::where('choice_id', $choice->id)->first();

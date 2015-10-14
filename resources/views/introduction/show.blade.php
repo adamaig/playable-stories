@@ -7,6 +7,7 @@
             h1,h2,h3,h4,h5,h6 {
                 font-family: '{{ $fonts[$introduction->story->heading_font]['css_name'] }}';
                 font-weight: {{ $fonts[$introduction->story->heading_font]['bold_weight'] }};
+                color: {{ $introduction->story->heading_font_color }};
             }
             .container {
                 text-align: {{ $introduction->text_alignment }};

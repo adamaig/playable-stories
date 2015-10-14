@@ -103,140 +103,95 @@ class StoryController extends Controller
         $story = Story::findOrFail($id);
 
         $googleFontList = array(
-            'Abril Fatface (No natural italic)' => array(
+            'Abril Fatface' => array(
                 'link_code' => 'Abril+Fatface',
                 'css_name' => 'Abril Fatface',
-                'weight' => 400,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Archivo Narrow' => array(
-                'link_code' => 'Archivo+Narrow:400italic,400',
+                'link_code' => 'Archivo+Narrow:400italic,400,700italic,700',
                 'css_name' => 'Archivo Narrow',
-                'weight' => 400,
-            ),
-            'Archivo Narrow Bold' => array(
-                'link_code' => 'Archivo+Narrow:700italic,700',
-                'css_name' => 'Archivo Narrow',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Arvo' => array(
-                'link_code' => 'Arvo:400italic,400',
+                'link_code' => 'Arvo:400italic,400,700italic,700',
                 'css_name' => 'Arvo',
-                'weight' => 400,
-            ),
-            'Arvo Bold' => array(
-                'link_code' => 'Arvo:700italic,700',
-                'css_name' => 'Arvo',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Crete Round' => array(
                 'link_code' => 'Crete+Round:400italic,400',
                 'css_name' => 'Crete Round',
-                'weight' => 400,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Droid Serif' => array(
-                'link_code' => 'Droid+Serif:400italic,400',
+                'link_code' => 'Droid+Serif:400italic,400,700italic,700',
                 'css_name' => 'Droid Serif',
-                'weight' => 400,
-            ),
-            'Droid Serif Bold' => array(
-                'link_code' => 'Droid+Serif:700italic,700',
-                'css_name' => 'Droid Serif',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Josefin Slab' => array(
-                'link_code' => 'Josefin+Slab:400,400italic',
+                'link_code' => 'Josefin+Slab:400,400italic,700,700italic',
                 'css_name' => 'Josefin Slab',
-                'weight' => 400,
-            ),
-            'Josefin Slab Bold' => array(
-                'link_code' => 'Josefin+Slab:700,700italic',
-                'css_name' => 'Josefin Slab',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Lato' => array(
-                'link_code' => 'Lato:400italic,400',
+                'link_code' => 'Lato:400italic,400,700,700italic',
                 'css_name' => 'Lato',
-                'weight' => 400,
-            ),
-            'Lato Bold' => array(
-                'link_code' => 'Lato:700italic,700',
-                'css_name' => 'Lato',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Merriweather' => array(
-                'link_code' => 'Merriweather:400italic,400',
+                'link_code' => 'Merriweather:400italic,400,700italic,700',
                 'css_name' => 'Merriweather',
-                'weight' => 400,
-            ),
-            'Merriweather Bold' => array(
-                'link_code' => 'Merriweather:700italic,700',
-                'css_name' => 'Merriweather',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Open Sans' => array(
-                'link_code' => 'Open+Sans:400,400italic',
+                'link_code' => 'Open+Sans:400,400italic,700italic,700',
                 'css_name' => 'Open Sans',
-                'weight' => 400,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
-            'Open Sans Bold' => array(
-                'link_code' => 'Open+Sans:700,700italic',
-                'css_name' => 'Open Sans',
-                'weight' => 700,
-            ),
-            'Oswald (No natural italic)' => array(
-                'link_code' => 'Oswald:400',
+            'Oswald' => array(
+                'link_code' => 'Oswald:400,700',
                 'css_name' => 'Oswald',
-                'weight' => 400,
-            ),
-            'Oswald Bold (No natural italic)' => array(
-                'link_code' => 'Oswald:700',
-                'css_name' => 'Oswald',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Roboto' => array(
-                'link_code' => 'Roboto:400,400italic',
+                'link_code' => 'Roboto:400,400italic,700,700italic',
                 'css_name' => 'Roboto',
-                'weight' => 400,
-            ),
-            'Roboto Bold' => array(
-                'link_code' => 'Roboto:700,700italic',
-                'css_name' => 'Roboto',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Roboto Condensed' => array(
-                'link_code' => 'Roboto+Condensed:400,400italic',
+                'link_code' => 'Roboto+Condensed:400,400italic,700,700italic',
                 'css_name' => 'Roboto Condensed',
-                'weight' => 400,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
-            'Roboto Condensed Bold' => array(
-                'link_code' => 'Roboto+Condensed:700,700italic',
-                'css_name' => 'Roboto Condensed',
-                'weight' => 700,
-            ),
-            'Roboto Slab (No natural italic)' => array(
-                'link_code' => 'Roboto+Slab:400,400italic',
+            'Roboto Slab' => array(
+                'link_code' => 'Roboto+Slab:400,400italic,700,700italic',
                 'css_name' => 'Roboto Slab',
-                'weight' => 400,
-            ),
-            'Roboto Slab Bold (No natural italic)' => array(
-                'link_code' => 'Roboto+Slab:700,700italic',
-                'css_name' => 'Roboto Slab',
-                'weight' => 700,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
             'Ubuntu' => array(
-                'link_code' => 'Ubuntu:400,400italic',
+                'link_code' => 'Ubuntu:400,400italic,700,700italic',
                 'css_name' => 'Ubuntu',
-                'weight' => 400,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
-            'Ubuntu Bold' => array(
-                'link_code' => 'Ubuntu:700,700italic',
-                'css_name' => 'Ubuntu',
-                'weight' => 700,
-            ),
-            'Varela Round (No natural italic)' => array(
+            'Varela Round' => array(
                 'link_code' => 'Varela+Round',
                 'css_name' => 'Varela Round',
-                'weight' => 400,
+                'normal_weight' => 400,
+                'bold_weight' => 700,
             ),
         );
 

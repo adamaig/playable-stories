@@ -6,7 +6,7 @@
         <style>
             h1,h2,h3,h4,h5,h6 {
                 font-family: '{{ $fonts[$introduction->story->heading_font]['css_name'] }}';
-                font-weight: {{ $fonts[$introduction->story->heading_font]['weight'] }};
+                font-weight: {{ $fonts[$introduction->story->heading_font]['bold_weight'] }};
             }
             .container {
                 text-align: {{ $introduction->text_alignment }};
@@ -14,11 +14,13 @@
         </style>
     @endif
     @if (!empty($introduction->story->body_font))
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$introduction->story->body_font]['link_code'] }}">
+        @if ( $introduction->story->body_font != $introduction->story->heading_font )
+            <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$introduction->story->body_font]['link_code'] }}">
+        @endif
         <style>
             body {
                 font-family: '{{ $fonts[$introduction->story->body_font]['css_name'] }}';
-                font-weight: {{ $fonts[$introduction->story->body_font]['weight'] }};
+                font-weight: {{ $fonts[$introduction->story->body_font]['normal_weight'] }};
             }
         </style>
     @endif

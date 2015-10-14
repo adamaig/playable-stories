@@ -7,16 +7,18 @@
         <style>
             h1,h2,h3,h4,h5,h6 {
                 font-family: '{{ $fonts[$slide->story->heading_font]['css_name'] }}';
-                font-weight: {{ $fonts[$slide->story->heading_font]['weight'] }};
+                font-weight: {{ $fonts[$slide->story->heading_font]['bold_weight'] }};
             }
         </style>
     @endif
     @if (!empty($slide->story->body_font))
-        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$slide->story->body_font]['link_code'] }}">
+        @if ( $slide->story->body_font != $slide->story->heading_font )
+            <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$slide->story->body_font]['link_code'] }}">
+        @endif
         <style>
             body {
                 font-family: '{{ $fonts[$slide->story->body_font]['css_name'] }}';
-                font-weight: {{ $fonts[$slide->story->body_font]['weight'] }};
+                font-weight: {{ $fonts[$slide->story->body_font]['normal_weight'] }};
             }
         </style>
     @endif

@@ -9,6 +9,7 @@ use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
 
 use PlayableStories\Story;
+use PlayableStories\Slide;
 use PlayableStories\Meter;
 use PlayableStories\Introduction;
 
@@ -84,8 +85,7 @@ class StoryController extends Controller
         }
 
         if (count($story->introductions()->get()) == 0) {
-            $firstSlide = Slide::where('story_id', $story->id)->orderBy('order', 'ASC')->first();
-            return redirect('/slide/'.$firstSlide->id);
+            return redirect('/story/'.$story->id.'/1');
         } else {
             $introduction = Introduction::where('story_id', $story->id)->first();
             return redirect('/introduction/'.$introduction->id);

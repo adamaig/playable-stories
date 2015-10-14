@@ -7006,6 +7006,9 @@ fieldset[disabled] .btn-panel-transparent.active {
     position: relative;
   }
 }
+.story-view .modal {
+  color: #333;
+}
 .story-view .container-valign-center {
   padding-top: 102px;
   /* Navbar height + 30px */

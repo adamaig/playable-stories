@@ -463,7 +463,7 @@ class SlideController extends Controller
         
         if ($choice->meter_effect == 'none') {
             if (count($story->slides()->get()) == $order) {
-                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
             }
 
             $outcome = Outcome::where('choice_id', $choice->id)->first();
@@ -481,11 +481,11 @@ class SlideController extends Controller
 
             foreach ($story->meters()->get() as $key => $meter) {
                 if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') <= $meter->min_value && $meter->min_value !== null) {
-                    return view('slide.end')->withText($meter->min_value_text)->withHeading($meter->min_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                    return view('slide.end')->withText($meter->min_value_text)->withHeading($meter->min_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
                 }
 
                 if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') >= $meter->max_value && $meter->max_value !== null) {
-                    return view('slide.end')->withText($meter->max_value_text)->withHeading($meter->max_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                    return view('slide.end')->withText($meter->max_value_text)->withHeading($meter->max_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
                 }
             }
 
@@ -515,19 +515,19 @@ class SlideController extends Controller
 
             foreach ($story->meters()->get() as $key => $meter) {
                 if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') <= $meter->min_value && $meter->min_value !== null) {
-                    return view('slide.end')->withText($meter->min_value_text)->withHeading($meter->min_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                    return view('slide.end')->withText($meter->min_value_text)->withHeading($meter->min_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
                 }
 
                 if (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') >= $meter->max_value && $meter->max_value !== null) {
-                    return view('slide.end')->withText($meter->max_value_text)->withHeading($meter->max_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                    return view('slide.end')->withText($meter->max_value_text)->withHeading($meter->max_value_header)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
                 }
             }
 
             if (count($story->slides()->get()) == $order) {
-                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
             }
 
-            return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);;
+            return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);
         }
     }
 }

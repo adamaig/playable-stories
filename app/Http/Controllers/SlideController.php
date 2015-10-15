@@ -450,14 +450,11 @@ class SlideController extends Controller
             $outcome = Outcome::where('choice_id', $choiceId)->first();
             $vignette = $outcome->vignette;
 
-            $randomNumber = rand(1,100);
-
-            if ($randomNumber <= $outcome->likelihood) {
+            if (rand(1,100) <= $outcome->likelihood) {
                 foreach ($outcome->results()->get() as $key => $result) {
                     $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
                     Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $newMeterValue);
                 }
-                dd('likelihood was '.$outcome->likelihood.' and number chosen was '.$randomNumber.' and vignette was '.$vignette);
             } else {
                 $outcome = Outcome::where('choice_id', $choiceId)->orderBy('id', 'desc')->first();
                 $vignette = $outcome->vignette;
@@ -466,7 +463,6 @@ class SlideController extends Controller
                     $newMeterValue = (Session::get('story-'.$story->id.'-meter-'.($key+1).'-value') + $result->change);
                     Session::put('story-'.$story->id.'-meter-'.($key+1).'-value', $newMeterValue);
                 }
-                dd('likelihood was '.$outcome->likelihood.' and number chosen was '.$randomNumber.' and vignette was '.$vignette);
             }
 
             foreach ($story->meters()->get() as $key => $meter) {

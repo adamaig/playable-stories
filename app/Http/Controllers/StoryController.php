@@ -211,7 +211,6 @@ class StoryController extends Controller
         $rules = array(
             'story-name' => 'required',
             'background-color' => 'required|hex',
-            'heading-font-size' => 'required|numeric|min:10',
             'heading-font-color' => 'required|hex',
             'body-font-size' => 'required|numeric|min:10',
             'body-font-color' => 'required|hex',
@@ -227,7 +226,6 @@ class StoryController extends Controller
         // Design tab
         $story->background_color = $request->input('background-color');
         $story->heading_font = $request->input('heading-font');
-        $story->heading_font_size = $request->input('heading-font-size');
         $story->heading_font_color = $request->input('heading-font-color');
         $story->body_font = $request->input('body-font');
         $story->body_font_size = $request->input('body-font-size');

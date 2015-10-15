@@ -304,10 +304,6 @@ class SlideController extends Controller
         }
         $slide->save();
 
-        $adjacentSlide = Slide::where('order', '=', $slide->order)->where('id', '<>', $id)->first();
-        $adjacentSlide->order = $originalSlideOrder;
-        $adjacentSlide->save();
-
         return redirect('/story/' . $slide->story->id . '/edit');
     }
 

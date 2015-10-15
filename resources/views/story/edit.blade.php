@@ -140,11 +140,6 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="heading-font-size">Heading Font Size</label>
-                                        <input type="number" class="form-control" name="heading-font-size" id="heading-font-size" value="{{ $story->heading_font_size }}" min="10" />
-                                    </div>
-
-                                    <div class="form-group">
                                         <label for="heading-font-color">Heading Font Color</label>
                                         <div class="input-group heading-font-color">
                                             <span class="input-group-addon"><i></i></span>

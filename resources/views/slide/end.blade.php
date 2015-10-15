@@ -34,7 +34,7 @@
             main {
                 text-align: {{ $slide->text_alignment }};
             }
-            .container {
+            .content .container {
                 text-align: center;
             }
         a, a:hover, a:visited, a:active, a:link {

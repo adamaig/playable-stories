@@ -9,7 +9,7 @@
                 font-weight: {{ $fonts[$introduction->story->heading_font]['bold_weight'] }};
                 color: {{ $introduction->story->heading_font_color }};
             }
-            .container {
+            .content .container {
                 text-align: {{ $introduction->text_alignment }};
             }
         </style>

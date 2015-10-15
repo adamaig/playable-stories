@@ -39,7 +39,7 @@
             color: {{ $slide->story->link_color}};
         }
 
-        .container {
+        .content .container {
             text-align: {{ $slide->text_alignment }};
         }
         

@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="row text-center">
+                    <div class="row">
                         @foreach ($slide->choices()->get() as $key => $choice)
                             @if (count($slide->choices()->get()) == 3)
                                 <div class="col-xs-12 col-sm-4">

@@ -9,19 +9,10 @@ use PlayableStories\Http\Controllers\Controller;
 
 use PlayableStories\Story;
 use PlayableStories\Meter;
+use PlayableStories\OutcomeResult;
 
 class MeterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -51,6 +42,18 @@ class MeterController extends Controller
         $meter->max_value_header = null;
         $meter->max_value_text = null;
         $meter->save();
+
+        foreach ($story->slides()->get() as $slide) {
+            foreach ($slide->choices()->get() as $choice) {
+                foreach ($choice->outcomes()->get() as $outcome) {
+                    $result = new OutcomeResult;
+                    $result->outcome_id = $outcome->id;
+                    $result->meter_id = $meter->id;
+                    $result->change = 0;
+                    $result->save();
+                }
+            }
+        }
 
         return redirect('/story/' . $story->id . '/edit#tab_meters');
     }

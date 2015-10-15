@@ -29,11 +29,11 @@
         /* Background color and font sizes/colors/alignment */
         body {
             background-color: {{ $introduction->background_color }};
-            font-size: {{ $introduction->story->body_font_size}}px;
-            color: {{ $introduction->story->body_font_color}};
+            font-size: {{ $introduction->story->body_font_size }}px;
+            color: {{ $introduction->story->body_font_color }};
         }
         a, a:hover, a:visited, a:active, a:link {
-            color: {{ $introduction->story->link_color}};
+            color: {{ $introduction->story->link_color }};
         }
         
         /* Navbars */
@@ -50,8 +50,8 @@
         .btn-primary:active:hover,
         .btn-primary:focus,
         .btn-primary:link {
-            color: {{ $introduction->story->button_text_color}};
-            background-color: {{ $introduction->story->button_background_color}};
+            color: {{ $introduction->story->button_text_color }};
+            background-color: {{ $introduction->story->button_background_color }};
         }
             .btn-primary:hover {
                 opacity: 0.90;

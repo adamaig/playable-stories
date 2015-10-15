@@ -28,8 +28,8 @@
         /* Background color and font sizes/colors/alignment */
         body {
             background-color: {{ $slide->story->background_color }};
-            font-size: {{ $slide->story->body_font_size}}px;
-            color: {{ $slide->story->body_font_color}};
+            font-size: {{ $slide->story->body_font_size }}px;
+            color: {{ $slide->story->body_font_color }};
         }
             .navbar {
                 background-color: {{ $slide->story->background_color }};
@@ -52,8 +52,8 @@
         .btn-primary:active:hover,
         .btn-primary:focus,
         .btn-primary:link {
-            color: {{ $slide->story->button_text_color}};
-            background-color: {{ $slide->story->button_background_color}};
+            color: {{ $slide->story->button_text_color }};
+            background-color: {{ $slide->story->button_background_color }};
         }
             .btn-primary:hover {
                 opacity: 0.90;

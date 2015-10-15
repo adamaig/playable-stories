@@ -124,7 +124,11 @@
         
                         @if (count($slide->choices()->get()) == 0)
                             <div class="col-xs-12">
-                                <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                                @if (count($slide->story->slides()->get()) == $slide->order)
+                                    <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/end">Continue</a></p>
+                                @else
+                                    <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                                @endif
                             </div>
                         @endif
                     </div>
@@ -142,7 +146,11 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     @if (count($slide->choices()->get()) == 0)
-                                        <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                                        @if (count($slide->story->slides()->get()) == $slide->order)
+                                            <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/end">Continue</a></p>
+                                        @else
+                                            <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                                        @endif
                                     @else
                                         @foreach ($slide->choices()->get() as $key => $choice)
                                             <p><a href="/story/{{ $slide->story->id }}/{{ $slide->order }}/choice/{{ $choice->id}}">{{ $choice->text }}</a></p>

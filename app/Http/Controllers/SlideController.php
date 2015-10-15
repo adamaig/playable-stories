@@ -240,7 +240,7 @@ class SlideController extends Controller
             }
 
             if (count($story->slides()->get()) == $order) {
-                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList);
+                return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
             }
 
             return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);;

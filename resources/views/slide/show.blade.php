@@ -123,7 +123,9 @@
                         @endforeach
         
                         @if (count($slide->choices()->get()) == 0)
-                            <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                            <div class="col-xs-12">
+                                <p><a class="btn btn-lg btn-primary" href="/story/{{ $slide->story->id }}/{{ $slide->order+1 }}">Continue</a></p>
+                            </div>
                         @endif
                     </div>
                 @else

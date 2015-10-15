@@ -2,7 +2,68 @@
     
 @section('header-include')
 
+    @if (!empty($slide->story->heading_font))
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$slide->story->heading_font]['link_code'] }}">
+        <style>
+            h1,h2,h3,h4,h5,h6 {
+                font-family: '{{ $fonts[$slide->story->heading_font]['css_name'] }}';
+                font-weight: {{ $fonts[$slide->story->heading_font]['bold_weight'] }};
+                color: {{ $slide->story->heading_font_color }};
+            }
+        </style>
+    @endif
+    @if (!empty($slide->story->body_font))
+        @if ( $slide->story->body_font != $slide->story->heading_font )
+            <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ $fonts[$slide->story->body_font]['link_code'] }}">
+        @endif
+        <style>
+            body {
+                font-family: '{{ $fonts[$slide->story->body_font]['css_name'] }}';
+                font-weight: {{ $fonts[$slide->story->body_font]['normal_weight'] }};
+            }
+        </style>
+    @endif
+    
+    <style>
+        /* Background color and font sizes/colors/alignment */
+        body {
+            background-color: {{ $slide->story->background_color }};
+            font-size: {{ $slide->story->body_font_size }}px;
+            color: {{ $slide->story->body_font_color }};
+        }
+            .navbar {
+                background-color: {{ $slide->story->background_color }};
+            }
+        
+        a, a:hover, a:visited, a:active, a:link {
+            color: {{ $slide->story->link_color}};
+        }
 
+        .container {
+            text-align: {{ $slide->text_alignment }};
+        }
+        
+        /* Buttons */
+        .btn-primary,
+        .btn-primary:hover,
+        .btn-primary:visited,
+        .btn-primary:active,
+        .btn-primary:active:focus,
+        .btn-primary:active:hover,
+        .btn-primary:focus,
+        .btn-primary:link {
+            color: {{ $slide->story->button_text_color }};
+            background-color: {{ $slide->story->button_background_color }};
+        }
+            .btn-primary:hover {
+                opacity: 0.90;
+                filter: alpha(opacity=90); /* For IE8 and earlier */
+            }
+            .btn-primary:active:hover {
+                opacity: 1.0;
+                filter: alpha(opacity=100); /* For IE8 and earlier */
+            }
+    </style>
     
 @stop
 

@@ -13,6 +13,7 @@ Route::get('introduction/{id}', 'IntroductionController@show');
 Route::get('/story/{id}/introduction/edit', 'IntroductionController@edit');
 Route::post('/story/{id}/introduction', 'IntroductionController@update');
 Route::delete('/introduction/{id}', 'IntroductionController@destroy');
+Route::get('/introduction/{id}/remove/photo', 'IntroductionController@removePhoto');
 
 // Slides
 Route::get('/story/{id}/slide', 'SlideController@create');
@@ -21,6 +22,7 @@ Route::post('/slide/{id}', 'SlideController@update');
 Route::delete('/slide/{id}', 'SlideController@destroy');
 Route::get('/slide/{id}/duplicate', 'SlideController@duplicate');
 Route::get('/slide/{id}/shift/{direction}', 'SlideController@shift');
+Route::get('/slide/{id}/remove/image', 'SlideController@removeImage');
 
 // Choices
 Route::post('/slide/{id}/choice', 'ChoiceController@create');

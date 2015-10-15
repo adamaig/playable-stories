@@ -69,8 +69,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Image</label>
-                        <input type="file" name="image" id="image">
+                        <label for="image">Image @if ($slide->image)<a href="/slide/{{ $slide->id }}/remove/image" title="Remove Image"><i class="fa fa-trash-o"></i></a>@endif</label>
+                        @if ($slide->image)
+                            <p><img src="/img/slide-photos/{{ $slide->image }}" alt="" class="img-thumbnail"></p>
+                        @else
+                            <input type="file" name="image" id="image">
+                        @endif
                     </div>
 
                     <div class="form-group">

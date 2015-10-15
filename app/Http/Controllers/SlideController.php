@@ -5,6 +5,7 @@ namespace PlayableStories\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Session;
+use File;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -484,5 +485,23 @@ class SlideController extends Controller
 
             return redirect('/story/' . $story->id . '/' . ($order+1))->with('vignette', $vignette);
         }
+    }
+
+    /**
+     * Remove current image attached to slide.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function removeImage($id)
+    {
+        $slide = Slide::findOrFail($id);
+
+        File::delete('img/slide-photos/' . $slide->image);
+
+        $slide->image = null;
+        $slide->save();
+
+        return redirect('slide/'.$id.'/edit');
     }
 }

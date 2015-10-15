@@ -49,8 +49,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="photo">Photo</label>
-                        <input type="file" name="photo" id="photo">
+                        <label for="photo">Photo @if ($introduction->photo)<a href="/introduction/{{ $introduction->id }}/remove/photo" title="Remove Photo"><i class="fa fa-trash-o"></i></a>@endif</label>
+                        @if ($introduction->photo)
+                            <p><img src="/img/introduction-photos/{{ $introduction->photo }}" alt="" class="img-thumbnail"></p>
+                        @else
+                            <input type="file" name="photo" id="photo">
+                        @endif
                     </div>
                 </div>
             </div>

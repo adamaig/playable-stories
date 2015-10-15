@@ -3,6 +3,7 @@
 namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
+use File;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -226,5 +227,23 @@ class IntroductionController extends Controller
         }
 
         return $affectedRows;
+    }
+
+    /**
+     * Remove current photo attached to introduction.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function removePhoto($id)
+    {
+        $introduction = Introduction::findOrFail($id);
+
+        File::delete('img/introduction-photos/' . $introduction->photo);
+
+        $introduction->photo = null;
+        $introduction->save();
+
+        return redirect('story/'.$introduction->story->id.'/introduction/edit');
     }
 }

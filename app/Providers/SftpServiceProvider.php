@@ -1,6 +1,6 @@
 <?php
 
-namespace STTS\Providers;
+namespace PlayableStories\Providers;
 
 use League\Flysystem\Sftp\SftpAdapter;
 use Storage;

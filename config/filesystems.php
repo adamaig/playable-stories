@@ -62,6 +62,18 @@ return [
             // 'timeout'  => 30,
         ],
 
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => env('SFTP_HOST'),
+            'port' => env('SFTP_PORT'),
+            'username' => env('SFTP_USERNAME'),
+            'password' => env('SFTP_PASSWORD'),
+            // 'privateKey' => 'path/to/or/contents/of/privatekey',
+            // 'root' => '/path/to/root',
+            // 'timeout' => 10,
+            // 'directoryPerm' => 0755
+        ],
+
         's3' => [
             'driver' => 's3',
             'key'    => 'your-key',

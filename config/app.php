@@ -145,6 +145,7 @@ return [
         PlayableStories\Providers\EventServiceProvider::class,
         PlayableStories\Providers\RouteServiceProvider::class,
         PlayableStories\Providers\ValidatorServiceProvider::class,
+        PlayableStories\Providers\SftpServiceProvider::class,
 
         /*
          * Third Party Service Providers...

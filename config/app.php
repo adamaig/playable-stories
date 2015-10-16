@@ -150,6 +150,7 @@ return [
          * Third Party Service Providers...
          */
         Laracasts\Flash\FlashServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
     ],
 

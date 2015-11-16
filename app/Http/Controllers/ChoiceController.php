@@ -3,6 +3,7 @@
 namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -15,13 +16,13 @@ use PlayableStories\OutcomeResult;
 class ChoiceController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Instantiate a new ChoiceController instance.
      *
-     * @return Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
     /**
@@ -108,28 +109,6 @@ class ChoiceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -138,6 +117,11 @@ class ChoiceController extends Controller
     public function edit($id)
     {
         $choice = Choice::findOrFail($id);
+
+        if ($choice->slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $meters = $choice->slide->story->meters()->get();
 
         return view('choice.edit')->withChoice($choice)->withMeters($meters);
@@ -153,6 +137,10 @@ class ChoiceController extends Controller
     public function update(Request $request, $id)
     {
         $choice = Choice::findOrFail($id);
+
+        if ($choice->slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         $choice->text = $request->input('choice-text');
         $choice->save();
@@ -201,6 +189,10 @@ class ChoiceController extends Controller
     public function destroy($id)
     {
         $choice = Choice::findOrFail($id);
+
+        if ($choice->slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         $affectedRows  = Choice::where('id', '=', $id)->delete();
 

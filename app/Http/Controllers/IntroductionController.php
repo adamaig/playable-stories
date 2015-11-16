@@ -4,6 +4,8 @@ namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
 use File;
+use Config;
+use Auth;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -14,13 +16,13 @@ use PlayableStories\Introduction;
 class IntroductionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Instantiate a new IntroductionController instance.
      *
-     * @return Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     /**
@@ -41,17 +43,6 @@ class IntroductionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -61,98 +52,7 @@ class IntroductionController extends Controller
     {
         $introduction = Introduction::findOrFail($id);
 
-        $googleFontList = array(
-            'Abril Fatface' => array(
-                'link_code' => 'Abril+Fatface',
-                'css_name' => 'Abril Fatface',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Archivo Narrow' => array(
-                'link_code' => 'Archivo+Narrow:400italic,400,700italic,700',
-                'css_name' => 'Archivo Narrow',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Arvo' => array(
-                'link_code' => 'Arvo:400italic,400,700italic,700',
-                'css_name' => 'Arvo',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Crete Round' => array(
-                'link_code' => 'Crete+Round:400italic,400',
-                'css_name' => 'Crete Round',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Droid Serif' => array(
-                'link_code' => 'Droid+Serif:400italic,400,700italic,700',
-                'css_name' => 'Droid Serif',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Josefin Slab' => array(
-                'link_code' => 'Josefin+Slab:400,400italic,700,700italic',
-                'css_name' => 'Josefin Slab',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Lato' => array(
-                'link_code' => 'Lato:400italic,400,700,700italic',
-                'css_name' => 'Lato',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Merriweather' => array(
-                'link_code' => 'Merriweather:400italic,400,700italic,700',
-                'css_name' => 'Merriweather',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Open Sans' => array(
-                'link_code' => 'Open+Sans:400,400italic,700italic,700',
-                'css_name' => 'Open Sans',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Oswald' => array(
-                'link_code' => 'Oswald:400,700',
-                'css_name' => 'Oswald',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Roboto' => array(
-                'link_code' => 'Roboto:400,400italic,700,700italic',
-                'css_name' => 'Roboto',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Roboto Condensed' => array(
-                'link_code' => 'Roboto+Condensed:400,400italic,700,700italic',
-                'css_name' => 'Roboto Condensed',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Roboto Slab' => array(
-                'link_code' => 'Roboto+Slab:400,400italic,700,700italic',
-                'css_name' => 'Roboto Slab',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Ubuntu' => array(
-                'link_code' => 'Ubuntu:400,400italic,700,700italic',
-                'css_name' => 'Ubuntu',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Varela Round' => array(
-                'link_code' => 'Varela+Round',
-                'css_name' => 'Varela Round',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-        );
+        $googleFontList = Config::get('fonts');
 
         return view('introduction.show')->withIntroduction($introduction)->withFonts($googleFontList);
     }
@@ -166,6 +66,11 @@ class IntroductionController extends Controller
     public function edit($id)
     {
         $introduction = Introduction::where('story_id', '=', $id)->firstOrFail();
+
+        if ($introduction->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         return view('introduction.edit')->withIntroduction($introduction);
     }
 
@@ -190,6 +95,11 @@ class IntroductionController extends Controller
         $this->validate($request, $rules);
 
         $introduction = Introduction::where('story_id', '=', $id)->firstOrFail();
+
+        if ($introduction->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $introduction->message = $request->input('message');
         $introduction->text_alignment = $request->input('text-alignment');
         $introduction->background_color = $request->input('background-color');
@@ -218,6 +128,12 @@ class IntroductionController extends Controller
      */
     public function destroy($id)
     {
+        $introduction = Introduction::findOrFail($id);
+
+        if ($introduction->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $affectedRows = Introduction::destroy($id);
 
         if ($affectedRows > 0) {
@@ -238,6 +154,10 @@ class IntroductionController extends Controller
     public function removePhoto($id)
     {
         $introduction = Introduction::findOrFail($id);
+
+        if ($introduction->story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         File::delete('img/introduction-photos/' . $introduction->photo);
 

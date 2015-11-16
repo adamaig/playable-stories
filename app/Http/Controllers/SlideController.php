@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use File;
 use Config;
+use Auth;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -19,6 +20,16 @@ use PlayableStories\OutcomeResult;
 
 class SlideController extends Controller
 {
+    /**
+     * Instantiate a new SlideController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show', 'choose', 'end']]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -61,6 +72,11 @@ class SlideController extends Controller
     public function edit($id)
     {
         $slide = Slide::findOrFail($id);
+
+        if ($slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $meters = $slide->story->meters()->get();
         $meters = $meters->toArray();
         return view('slide.edit')->withSlide($slide)->withMeters($meters);
@@ -86,6 +102,11 @@ class SlideController extends Controller
         $this->validate($request, $rules);
 
         $slide = Slide::findOrFail($id);
+
+        if ($slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $slide->name = $request->input('name');
         $slide->content = $request->input('content');
         $slide->text_placement = $request->input('text-placement');
@@ -115,6 +136,10 @@ class SlideController extends Controller
     {
         $slide = Slide::find($id);
 
+        if ($slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $affectedRows = Slide::destroy($id);
 
         foreach (Slide::where('story_id', '=', $slide->story->id)->where('order', '>', $slide->order)->get() as $slide) {
@@ -140,6 +165,10 @@ class SlideController extends Controller
     public function duplicate($id)
     {
         $slide = Slide::find($id);
+
+        if ($slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         $currentSlideCount = count(Slide::where('story_id', '=', $slide->story->id)->get());
 
@@ -167,6 +196,10 @@ class SlideController extends Controller
     public function shift($id, $direction)
     {
         $slide = Slide::findOrFail($id);
+
+        if ($slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         $originalSlideOrder = $slide->order;
 
@@ -208,9 +241,9 @@ class SlideController extends Controller
         $choice = Choice::findOrFail($choiceId);
         $slide = Slide::where('story_id', $story->id)->where('order', $order)->first();
         $vignette = null;
-        
+
         $googleFontList = Config::get('fonts');
-        
+
         if ($choice->meter_effect == 'none') {
             if (count($story->slides()->get()) == $order) {
                 return view('slide.end')->withText($story->success_content)->withHeading($story->success_heading)->withSlide($slide)->withStory($story)->withFonts($googleFontList)->withVignette($vignette);
@@ -290,6 +323,10 @@ class SlideController extends Controller
     public function removeImage($id)
     {
         $slide = Slide::findOrFail($id);
+
+        if ($slide->story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         File::delete('img/slide-photos/' . $slide->image);
 

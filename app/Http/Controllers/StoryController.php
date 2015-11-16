@@ -4,6 +4,8 @@ namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Config;
+use Auth;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -16,13 +18,23 @@ use PlayableStories\Introduction;
 class StoryController extends Controller
 {
     /**
+     * Instantiate a new StoryController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
     public function index()
     {
-        $stories = Story::all();
+        $stories = Story::where('author', Auth::id())->get();
         return view('homepage')->withStories($stories);
     }
 
@@ -34,6 +46,7 @@ class StoryController extends Controller
     public function create()
     {
         $story = new Story;
+        $story->author = Auth::id();
         $story->save();
 
         $meter = new Meter;
@@ -42,26 +55,15 @@ class StoryController extends Controller
         $meter->name = 'Cash';
         $meter->type = 'currency';
         $meter->start_value = 1000;
-        $meter->min_value = 0; 
+        $meter->min_value = 0;
         $meter->min_value_header = 'You are out of money!';
         $meter->min_value_text = '<p>Sorry, but it looks like you don\'t have any cash left to continue. Game over pal!</p>';
-        $meter->max_value = null; 
+        $meter->max_value = null;
         $meter->max_value_header = null;
         $meter->max_value_text = null;
         $meter->save();
 
         return redirect('/story/' . $story->id . '/edit');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -102,98 +104,11 @@ class StoryController extends Controller
     {
         $story = Story::findOrFail($id);
 
-        $googleFontList = array(
-            'Abril Fatface' => array(
-                'link_code' => 'Abril+Fatface',
-                'css_name' => 'Abril Fatface',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Archivo Narrow' => array(
-                'link_code' => 'Archivo+Narrow:400italic,400,700italic,700',
-                'css_name' => 'Archivo Narrow',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Arvo' => array(
-                'link_code' => 'Arvo:400italic,400,700italic,700',
-                'css_name' => 'Arvo',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Crete Round' => array(
-                'link_code' => 'Crete+Round:400italic,400',
-                'css_name' => 'Crete Round',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Droid Serif' => array(
-                'link_code' => 'Droid+Serif:400italic,400,700italic,700',
-                'css_name' => 'Droid Serif',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Josefin Slab' => array(
-                'link_code' => 'Josefin+Slab:400,400italic,700,700italic',
-                'css_name' => 'Josefin Slab',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Lato' => array(
-                'link_code' => 'Lato:400italic,400,700,700italic',
-                'css_name' => 'Lato',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Merriweather' => array(
-                'link_code' => 'Merriweather:400italic,400,700italic,700',
-                'css_name' => 'Merriweather',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Open Sans' => array(
-                'link_code' => 'Open+Sans:400,400italic,700italic,700',
-                'css_name' => 'Open Sans',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Oswald' => array(
-                'link_code' => 'Oswald:400,700',
-                'css_name' => 'Oswald',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Roboto' => array(
-                'link_code' => 'Roboto:400,400italic,700,700italic',
-                'css_name' => 'Roboto',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Roboto Condensed' => array(
-                'link_code' => 'Roboto+Condensed:400,400italic,700,700italic',
-                'css_name' => 'Roboto Condensed',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Roboto Slab' => array(
-                'link_code' => 'Roboto+Slab:400,400italic,700,700italic',
-                'css_name' => 'Roboto Slab',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Ubuntu' => array(
-                'link_code' => 'Ubuntu:400,400italic,700,700italic',
-                'css_name' => 'Ubuntu',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-            'Varela Round' => array(
-                'link_code' => 'Varela+Round',
-                'css_name' => 'Varela Round',
-                'normal_weight' => 400,
-                'bold_weight' => 700,
-            ),
-        );
+        if ($story->author != Auth::id()) {
+            return redirect('/');
+        }
+
+        $googleFontList = Config::get('fonts');
 
         return view('story.edit')->withStory($story)->withFonts($googleFontList);
     }
@@ -222,6 +137,11 @@ class StoryController extends Controller
         $this->validate($request, $rules);
 
         $story = Story::findOrFail($id);
+
+        if ($story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $story->name = $request->input('story-name');
         // Design tab
         $story->background_color = $request->input('background-color');
@@ -252,6 +172,12 @@ class StoryController extends Controller
      */
     public function destroy($id)
     {
+        $story = Story::findOrFail($id);
+
+        if ($story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $affectedRows  = Story::where('id', '=', $id)->delete();
         if ($affectedRows > 0) {
             \Flash::info('The story has been deleted permanently.');

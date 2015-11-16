@@ -3,6 +3,7 @@
 namespace PlayableStories\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use PlayableStories\Http\Requests;
 use PlayableStories\Http\Controllers\Controller;
@@ -14,6 +15,16 @@ use PlayableStories\OutcomeResult;
 class MeterController extends Controller
 {
     /**
+     * Instantiate a new MeterController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return Response
@@ -21,6 +32,10 @@ class MeterController extends Controller
     public function create($id)
     {
         $story = Story::findOrFail($id);
+
+        if ($story->author != Auth::id()) {
+            return redirect('/');
+        }
 
         $currentMeters = $story->meters()->get();
 
@@ -35,10 +50,10 @@ class MeterController extends Controller
         $meter->name = 'Cash';
         $meter->type = 'currency';
         $meter->start_value = 1000;
-        $meter->min_value = 0; 
+        $meter->min_value = 0;
         $meter->min_value_header = 'You are out of money!';
         $meter->min_value_text = '<p>Sorry, but it looks like you don\'t have any cash left to continue. Game over pal!</p>';
-        $meter->max_value = null; 
+        $meter->max_value = null;
         $meter->max_value_header = null;
         $meter->max_value_text = null;
         $meter->save();
@@ -59,28 +74,6 @@ class MeterController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -89,6 +82,11 @@ class MeterController extends Controller
     public function edit($id)
     {
         $meter = Meter::findOrFail($id);
+
+        if ($meter->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         return view('meter.edit')->withMeter($meter);
     }
 
@@ -103,20 +101,24 @@ class MeterController extends Controller
     {
         $meter = Meter::findOrFail($id);
 
+        if ($meter->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $meter->name = $request->input('meter-name');
         $meter->type = $request->input('meter-type');
         $meter->start_value = $request->input('meter-start-value');
         if ($request->input('meter-no-min') != 'true') {
-            $meter->min_value = $request->input('meter-min-value'); 
+            $meter->min_value = $request->input('meter-min-value');
         } else {
-            $meter->min_value = null; 
+            $meter->min_value = null;
         }
         $meter->min_value_header = $request->input('meter-min-value-header');
         $meter->min_value_text = $request->input('meter-min-value-text');
         if ($request->input('meter-no-max') != 'true') {
             $meter->max_value = $request->input('meter-max-value');
         } else {
-            $meter->max_value = null; 
+            $meter->max_value = null;
         }
         $meter->max_value_header = $request->input('meter-max-value-header');
         $meter->max_value_text = $request->input('meter-max-value-text');
@@ -136,6 +138,12 @@ class MeterController extends Controller
      */
     public function destroy($id)
     {
+        $meter = Meter::findOrFail($id);
+
+        if ($meter->story->author != Auth::id()) {
+            return redirect('/');
+        }
+
         $affectedRows = Meter::destroy($id);
 
         if ($affectedRows > 0) {

@@ -1,0 +1,1 @@
+Click here to reset your Playable Stories password: {{ url('password/reset/'.$token) }}

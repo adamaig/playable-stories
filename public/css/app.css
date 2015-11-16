@@ -5,3 +5,9 @@
 #story-builder-form {
     margin-top: 20px;
 }
+
+#logout-link {
+    float: left;
+    margin-top: 17px;
+    font-size: 11px;
+}

@@ -76,6 +76,10 @@ class StoryController extends Controller
     {
         $story = Story::findOrFail($id);
 
+        if (count($story->slides) == 0 && count($story->introductions) == 0) {
+            return view('errors.no-slides');
+        }
+
         foreach ($story->meters()->get() as $key => $meter) {
             Session::forget('story-'.$story->id.'-meter-'.($key+1).'-value');
             Session::forget('story-'.$story->id.'-meter-'.($key+1).'-name');

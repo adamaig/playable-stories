@@ -1,6 +1,10 @@
 <?php
 
 Route::get('/', 'StoryController@index');
+Route::get('/home', function()
+{
+    return Redirect::to('/');
+});
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

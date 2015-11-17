@@ -40,7 +40,7 @@
                     <a class="navbar-brand" href="/">Playable Stories</a>
                     @if(Auth::check())
                         <div id="logout-link">
-                            <a href="/">my stories</a> | <a href="/auth/logout">log out</a>
+                            <a href="/">My Stories</a><a href="/auth/logout">Log Out</a>
                         </div>
                     @endif
                 </div>

@@ -93,17 +93,12 @@ var sendpress = {"invalidemail":"Please enter your e-mail address","missingemail
     </div>
     <div class="fl-cta-button">
         <div class="fl-button-wrap fl-button-width-auto">
-    <a href="/" target="_blank" class="fl-button" role="button">
+    <a href="http://playablestories.org" class="fl-button" role="button">
                 <span class="fl-button-text">Home Page</span>
             </a>
 </div>  </div>
 </div>  </div>
-</div><div class="fl-module fl-module-rich-text fl-node-563d11c70e2cf" data-node="563d11c70e2cf"  data-animation-delay="0.0" >
-    <div class="fl-module-content fl-node-content">
-        <div class="fl-rich-text">
-    <p style="text-align: center;">Built with a grant from the <a href="http://knightfoundation.org/funding-initiatives/knight-prototype-fund/" target="_blank">Knight Prototype Fund</a>. </p></div>   </div>
-</div>      </div>
-    </div>
+</div>
     </div>      </div>
     </div>
 </div></div>    </div><!-- .fl-post-content -->

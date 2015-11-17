@@ -3,7 +3,7 @@
 @section('navbar-right')
     <div id="navbar" class="navbar-collapse collapse">
         <div class="navbar-right">
-            <a href="/auth/login" class="btn btn-sm btn-primary navbar-btn">Login</a>
+            <a href="/auth/login" class="btn btn-sm btn-primary navbar-btn">Log In</a>
         </div>
     </div>
 @stop

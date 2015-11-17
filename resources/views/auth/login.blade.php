@@ -45,7 +45,7 @@
                       </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default">Login</button>
+                        <button type="submit" class="btn btn-default">Log In</button>
                     </div>
                     <p class="help-block"><a href="/password/email">Forgot your password?</a></p>
                 </form>

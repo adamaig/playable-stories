@@ -39,7 +39,7 @@
                     </button>
                     <a class="navbar-brand" href="/">Playable Stories</a>
                     @if(Auth::check())
-                        <a id="logout-link" href="/auth/logout">sign out</a>
+                        <a id="logout-link" href="/auth/logout">log out</a>
                     @endif
                 </div>
                 @yield('navbar-right')

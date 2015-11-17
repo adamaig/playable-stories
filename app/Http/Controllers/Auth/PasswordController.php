@@ -4,6 +4,8 @@ namespace PlayableStories\Http\Controllers\Auth;
 
 use PlayableStories\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 use Auth;
 
@@ -35,18 +37,34 @@ class PasswordController extends Controller
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
-     * @param  string  $password
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function resetPassword($user, $password)
+    public function postReset(Request $request)
     {
-        $user->password = bcrypt($password);
+        $this->validate($request, [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ]);
 
-        $user->save();
+        $credentials = $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
 
-        \Flash::success('Your password has been updated successfully, you may now log in.');
+        $response = Password::reset($credentials, function ($user, $password) {
+            $this->resetPassword($user, $password);
+        });
 
-        return view('auth.login');
+        switch ($response) {
+            case Password::PASSWORD_RESET:
+                $request->session()->put('password_change', 'true');
+                return redirect($this->redirectPath());
+
+            default:
+                return redirect()->back()
+                            ->withInput($request->only('email'))
+                            ->withErrors(['email' => trans($response)]);
+        }
     }
 }

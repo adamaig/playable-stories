@@ -14,6 +14,12 @@
 
 @section('content')
     <div class="container">
+        @if (Session::pull('password_change') == 'true')
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                Your password has been changed successfully.
+            </div>
+        @endif
         @include('flash::message')
         @if (count($stories) == 0)
             <div class="jumbotron">

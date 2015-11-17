@@ -31,7 +31,6 @@
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="...">
                             <a class="btn btn-default" href="/story/{{ $story->id }}/edit">Edit</a>
-                            <a class="btn btn-default">Duplicate</a>
                             <a class="btn btn-default" href="javascript:deleteStory('{{ $story->id }}')">Delete</a>
                         </div>
                     </div>

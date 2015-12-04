@@ -95,6 +95,7 @@
             // Initialize ColorPicker
             $('.background-color').colorpicker({
                 align: 'left',
+                format: 'hex',
             });
 
             // Initialize TinyMCE

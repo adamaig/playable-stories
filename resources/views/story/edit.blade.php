@@ -65,7 +65,7 @@
                                                 <a href="javascript:deleteSlide('{{ $slide->id }}')" class="btn btn-panel-transparent"><i class="fa fa-times text-valign-center"></i></a>
                                             </div>
                                         </h3>
-                                        
+
                                     </div>
                                 </div>
                             @endforeach
@@ -216,6 +216,7 @@
             // Initialize ColorPicker
             $('.background-color, .heading-font-color, .body-font-color, .link-color, .button-background-color, .button-text-color').colorpicker({
                 align: 'left',
+                format: 'hex',
             });
 
             // Initialize TinyMCE
@@ -236,7 +237,7 @@
             var prefix = "tab_";
             if (hash) {
                 $('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
-            } 
+            }
 
             // Change hash for page-reload
             $('.nav-tabs a').on('shown.bs.tab', function (e) {

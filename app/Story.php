@@ -24,4 +24,9 @@ class Story extends Model {
 		return $this->hasMany('PlayableStories\Introduction');
 	}
 
+	public function group()
+	{
+		return $this->belongsTo('PlayableStories\Group');
+	}
+
 }

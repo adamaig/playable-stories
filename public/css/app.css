@@ -15,3 +15,8 @@
 #logout-link a {
     margin-right: 10px;
 }
+
+.story-group-list a {
+    color: #333;
+    text-decoration: underline;
+}

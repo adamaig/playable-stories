@@ -26,7 +26,7 @@ class Story extends Model {
 
 	public function group()
 	{
-		return $this->belongsTo('PlayableStories\Group');
+		return $this->belongsToMany('PlayableStories\Group')->withPivot('button_name');
 	}
 
 }

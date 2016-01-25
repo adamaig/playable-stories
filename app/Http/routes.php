@@ -57,3 +57,12 @@ Route::get('/slide/{id}/meter', 'MeterController@create');
 Route::get('/meter/{id}/edit', 'MeterController@edit');
 Route::post('/meter/{id}', 'MeterController@update');
 Route::delete('/meter/{id}', 'MeterController@destroy');
+
+// Groups
+Route::post('/group/update/{id}', 'GroupController@update');
+Route::get('/group/{id}/remove/photo', 'GroupController@removePhoto');
+Route::get('/group/create', 'GroupController@create');
+Route::get('/group/{id}/edit', 'GroupController@edit');
+Route::get('/group/{id}', 'GroupController@show');
+Route::post('/group/create', 'GroupController@store');
+Route::delete('/group/{id}', 'GroupController@destroy');

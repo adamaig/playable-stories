@@ -16,6 +16,6 @@ class Group extends Model
 
     public function stories()
     {
-        return $this->hasMany('PlayableStories\Story');
+        return $this->belongsToMany('PlayableStories\Story')->withPivot('button_name');
     }
 }

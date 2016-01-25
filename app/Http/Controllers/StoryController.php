@@ -34,8 +34,9 @@ class StoryController extends Controller
      */
     public function index()
     {
+        $groups = Auth::user()->groups;
         $stories = Story::where('author', Auth::id())->get();
-        return view('homepage')->withStories($stories);
+        return view('homepage')->withStories($stories)->withGroups($groups);
     }
 
     /**

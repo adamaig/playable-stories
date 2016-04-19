@@ -69,9 +69,9 @@ return [
             'username' => env('SFTP_USERNAME'),
             'password' => env('SFTP_PASSWORD'),
             // 'privateKey' => 'path/to/or/contents/of/privatekey',
-            // 'root' => '/path/to/root',
+            'root' => env('SFTP_PATH'),
             // 'timeout' => 10,
-            // 'directoryPerm' => 0755
+            'directoryPerm' => 0755
         ],
 
         's3' => [

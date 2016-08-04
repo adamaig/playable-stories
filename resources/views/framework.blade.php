@@ -46,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Playable Media: Story Builder</a>
+                    <a class="navbar-brand" href="/">Story Builder</a>
                     @if(Auth::check())
                         <div id="logout-link">
                             <a href="/">My Stories</a><a href="/auth/logout">Log Out</a>

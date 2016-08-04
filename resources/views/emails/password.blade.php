@@ -1,1 +1,1 @@
-Click here to reset your Playable Stories password: {{ url('password/reset/'.$token) }}
+Click here to reset your Playable Media: Story Builder password: {{ url('password/reset/'.$token) }}

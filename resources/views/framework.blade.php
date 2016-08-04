@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Playable Stories</title>
+        <title>Playable Media: Story Builder</title>
 
         <!-- Bootstrap -->
         <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Playable Stories</a>
+                    <a class="navbar-brand" href="/">Playable Media: Story Builder</a>
                     @if(Auth::check())
                         <div id="logout-link">
                             <a href="/">My Stories</a><a href="/auth/logout">Log Out</a>

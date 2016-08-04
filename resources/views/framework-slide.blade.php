@@ -66,7 +66,7 @@
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container">
                 <div class="navbar-center">
-                    <p class="navbar-text text-center" style="font-size: initial;"><small>Powered by <a href="http://playablestories.org">Playable Stories</a></small></p>
+                    <p class="navbar-text text-center" style="font-size: initial;"><small>Powered by <a href="http://playablemedia.org">Playable Media</a></small></p>
                 </div>
             </div>
         </nav>

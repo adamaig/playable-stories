@@ -55,6 +55,10 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 
+        <!-- Include IFrame-Resizer to support embedding in other contexts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.5/ie8.polyfils.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.5/iframeResizer.contentWindow.min.js"></script>
+
         @yield('footer-include')
     </body>
 </html>

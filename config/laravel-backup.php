@@ -48,7 +48,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'sftp',
+                's3',
             ],
         ],
     ],
@@ -65,33 +65,33 @@ return [
             /*
              * The amount of days that all daily backups must be kept.
              */
-            'keepAllBackupsForDays' => 7,
+            'keepAllBackupsForDays' => 90,
 
             /*
              * The amount of days that all daily backups must be kept.
              */
-            'keepDailyBackupsForDays' => 16,
+            'keepDailyBackupsForDays' => 90,
 
             /*
              * The amount of weeks of which one weekly backup must be kept.
              */
-            'keepWeeklyBackupsForWeeks' => 8,
+            'keepWeeklyBackupsForWeeks' => 0,
 
             /*
              * The amount of months of which one monthly backup must be kept.
              */
-            'keepMonthlyBackupsForMonths' => 4,
+            'keepMonthlyBackupsForMonths' => 0,
 
             /*
              * The amount of years of which one yearly backup must be kept
              */
-            'keepYearlyBackupsForYears' => 2,
+            'keepYearlyBackupsForYears' => 0,
 
             /*
              * After cleaning up the backups remove the oldest backup until
              * this amount of megabytes has been reached.
              */
-            //'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 5000
+            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 999999
         ]
     ],
 
@@ -104,9 +104,9 @@ return [
     'monitorBackups' => [
         [
             'name' => 'playable-media',
-            'disks' => ['sftp'],
-            'newestBackupsShouldNotBeOlderThanDays' => 1,
-            //'storageUsedMayNotBeHigherThanMegabytes' => 5000,
+            'disks' => ['s3'],
+            'newestBackupsShouldNotBeOlderThanDays' => 90,
+            'storageUsedMayNotBeHigherThanMegabytes' => 999999,
         ],
 
         /*
